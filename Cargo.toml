@@ -1,0 +1,31 @@
+[package]
+name = "vulkan-tutorial-rust"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+
+[dependencies]
+winit = "0.30"
+ash = "0.38"
+image = "0.25"
+nalgebra = "0.33"
+tobj = "4"
+anyhow = "1"
+pretty_env_logger = "0.5"
+log = "0.4"
+libloading = "0.8"
+thiserror = "2"
+raw-window-handle = "0.6"
+
+[build-dependencies]
+walkdir = "2"
+
+[[bin]]
+name = "26_texture_mapping"
+path = "src/26_texture_mapping.rs"
+
+[[bin]]
+name = "winit_example"
+path = "src/winit_example.rs"
+
+

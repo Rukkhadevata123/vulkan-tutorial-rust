@@ -1,0 +1,4889 @@
+    Blocking waiting for file lock on build directory
+   Compiling x11-dl v2.21.0
+   Compiling vulkan-tutorial-rust v0.1.0 (/home/yoimiya/vulkan-tutorial-rust)
+   Compiling winit v0.30.10
+error: null characters in C string literals are not supported
+   --> src/26_texture_mapping.rs:475:51
+    |
+475 |         .application_name(c"Vulkan Tutorial (Rust)\0")
+    |                                                   ^^
+
+error: couldn't read `src/../shaders/25/vert.spv`: No such file or directory (os error 2)
+   --> src/26_texture_mapping.rs:868:16
+    |
+868 |     let vert = include_bytes!("../shaders/25/vert.spv");
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: this error originates in the macro `include_bytes` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: couldn't read `src/../shaders/25/frag.spv`: No such file or directory (os error 2)
+   --> src/26_texture_mapping.rs:869:16
+    |
+869 |     let frag = include_bytes!("../shaders/25/frag.spv");
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: this error originates in the macro `include_bytes` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0433]: failed to resolve: use of undeclared crate or module `png`
+    --> src/26_texture_mapping.rs:1031:19
+     |
+1031 |     let decoder = png::Decoder::new(image);
+     |                   ^^^ use of undeclared crate or module `png`
+
+error[E0425]: cannot find function `perspective` in crate `nalgebra`
+   --> src/26_texture_mapping.rs:352:34
+    |
+352 |         let mut proj = nalgebra::perspective(
+    |                                  ^^^^^^^^^^^ not found in `nalgebra`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:369:13
+    |
+369 |             vk::MemoryMapFlags::empty(),
+    |             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::MemoryMapFlags;
+    |
+help: if you import `MemoryMapFlags`, refer to it directly
+    |
+369 -             vk::MemoryMapFlags::empty(),
+369 +             MemoryMapFlags::empty(),
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:394:55
+    |
+394 |             .resize(self.data.swapchain_images.len(), vk::Fence::null());
+    |                                                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::Fence;
+    |
+help: if you import `Fence`, refer to it directly
+    |
+394 -             .resize(self.data.swapchain_images.len(), vk::Fence::null());
+394 +             .resize(self.data.swapchain_images.len(), Fence::null());
+    |
+
+error[E0425]: cannot find value `PORTABILITY_MACOS_VERSION` in this scope
+   --> src/26_texture_mapping.rs:507:69
+    |
+507 |     let flags = if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+    |                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION` in module `ash::vk`
+    --> src/26_texture_mapping.rs:509:34
+     |
+509  |         extensions.push(ash::vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name.as_ptr());
+     |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: a constant with a similar name exists: `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_SPEC_VERSION`
+     |
+    ::: /home/yoimiya/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ash-0.38.0+1.3.281/src/vk/extensions.rs:4610:1
+     |
+4610 | pub const KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_SPEC_VERSION: u32 = 2u32;
+     | --------------------------------------------------------------- similarly named constant `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_SPEC_VERSION` defined here
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:511:9
+    |
+511 |         vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
+    |         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::InstanceCreateFlags;
+    |
+help: if you import `InstanceCreateFlags`, refer to it directly
+    |
+511 -         vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
+511 +         InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:513:9
+    |
+513 |         vk::InstanceCreateFlags::empty()
+    |         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::InstanceCreateFlags;
+    |
+help: if you import `InstanceCreateFlags`, refer to it directly
+    |
+513 -         vk::InstanceCreateFlags::empty()
+513 +         InstanceCreateFlags::empty()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:522:20
+    |
+522 |     let mut info = vk::InstanceCreateInfo::builder()
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::InstanceCreateInfo;
+    |
+help: if you import `InstanceCreateInfo`, refer to it directly
+    |
+522 -     let mut info = vk::InstanceCreateInfo::builder()
+522 +     let mut info = InstanceCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:528:26
+    |
+528 |     let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessengerCreateInfoEXT;
+    |
+help: if you import `DebugUtilsMessengerCreateInfoEXT`, refer to it directly
+    |
+528 -     let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
+528 +     let mut debug_info = DebugUtilsMessengerCreateInfoEXT::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:529:27
+    |
+529 |         .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageSeverityFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageSeverityFlagsEXT`, refer to it directly
+    |
+529 -         .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
+529 +         .message_severity(DebugUtilsMessageSeverityFlagsEXT::all())
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:531:13
+    |
+531 |             vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
+    |             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageTypeFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageTypeFlagsEXT`, refer to it directly
+    |
+531 -             vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
+531 +             DebugUtilsMessageTypeFlagsEXT::GENERAL
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:532:19
+    |
+532 |                 | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageTypeFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageTypeFlagsEXT`, refer to it directly
+    |
+532 -                 | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
+532 +                 | DebugUtilsMessageTypeFlagsEXT::VALIDATION
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:533:19
+    |
+533 |                 | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageTypeFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageTypeFlagsEXT`, refer to it directly
+    |
+533 -                 | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+533 +                 | DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:553:15
+    |
+553 |     severity: vk::DebugUtilsMessageSeverityFlagsEXT,
+    |               ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:554:12
+    |
+554 |     type_: vk::DebugUtilsMessageTypeFlagsEXT,
+    |            ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:555:18
+    |
+555 |     data: *const vk::DebugUtilsMessengerCallbackDataEXT,
+    |                  ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:557:6
+    |
+557 | ) -> vk::Bool32 {
+    |      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:561:20
+    |
+561 |     if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::ERROR {
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageSeverityFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageSeverityFlagsEXT`, refer to it directly
+    |
+561 -     if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::ERROR {
+561 +     if severity >= DebugUtilsMessageSeverityFlagsEXT::ERROR {
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:563:27
+    |
+563 |     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::WARNING {
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageSeverityFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageSeverityFlagsEXT`, refer to it directly
+    |
+563 -     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::WARNING {
+563 +     } else if severity >= DebugUtilsMessageSeverityFlagsEXT::WARNING {
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:565:27
+    |
+565 |     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::INFO {
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DebugUtilsMessageSeverityFlagsEXT;
+    |
+help: if you import `DebugUtilsMessageSeverityFlagsEXT`, refer to it directly
+    |
+565 -     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::INFO {
+565 +     } else if severity >= DebugUtilsMessageSeverityFlagsEXT::INFO {
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:571:5
+    |
+571 |     vk::FALSE
+    |     ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:578:43
+    |
+578 | unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
+    |                                           ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+578 | unsafe fn pick_physical_device(instance: &Instant, data: &mut AppData) -> Result<()> {
+    |                                           ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:595:16
+    |
+595 |     instance: &Instance,
+    |                ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+595 |     instance: &Instant,
+    |                ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:597:22
+    |
+597 |     physical_device: vk::PhysicalDevice,
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:608:39
+    |
+608 |     if features.sampler_anisotropy != vk::TRUE {
+    |                                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:615:55
+    |
+615 | unsafe fn check_physical_device_extensions(instance: &Instance, physical_device: vk::PhysicalDevice) -> Result<()> {
+    |                                                       ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+615 | unsafe fn check_physical_device_extensions(instance: &Instant, physical_device: vk::PhysicalDevice) -> Result<()> {
+    |                                                       ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:615:82
+    |
+615 | unsafe fn check_physical_device_extensions(instance: &Instance, physical_device: vk::PhysicalDevice) -> Result<()> {
+    |                                                                                  ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0412]: cannot find type `Entry` in this scope
+   --> src/26_texture_mapping.rs:632:41
+    |
+632 | unsafe fn create_logical_device(entry: &Entry, instance: &Instance, data: &mut AppData) -> Result<Device> {
+    |                                         ^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+1   + use std::collections::btree_map::Entry;
+    |
+1   + use std::collections::btree_set::Entry;
+    |
+1   + use std::collections::hash_map::Entry;
+    |
+1   + use std::collections::hash_set::Entry;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:632:59
+    |
+632 | unsafe fn create_logical_device(entry: &Entry, instance: &Instance, data: &mut AppData) -> Result<Device> {
+    |                                                           ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+632 | unsafe fn create_logical_device(entry: &Entry, instance: &Instant, data: &mut AppData) -> Result<Device> {
+    |                                                           ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:632:99
+    |
+632 | unsafe fn create_logical_device(entry: &Entry, instance: &Instance, data: &mut AppData) -> Result<Device> {
+    |                                                                                                   ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:645:13
+    |
+645 |             vk::DeviceQueueCreateInfo::builder()
+    |             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DeviceQueueCreateInfo;
+    |
+help: if you import `DeviceQueueCreateInfo`, refer to it directly
+    |
+645 -             vk::DeviceQueueCreateInfo::builder()
+645 +             DeviceQueueCreateInfo::builder()
+    |
+
+error[E0425]: cannot find value `VALIDATION_LAYER` in this scope
+   --> src/26_texture_mapping.rs:654:14
+    |
+24  | const VALIDATION_LAYERS: &'static [&'static [u8]] = &[b"VK_LAYER_KHRONOS_validation"];
+    | -------------------------------------------------------------------------------------- similarly named constant `VALIDATION_LAYERS` defined here
+...
+654 |         vec![VALIDATION_LAYER.as_ptr()]
+    |              ^^^^^^^^^^^^^^^^ help: a constant with a similar name exists: `VALIDATION_LAYERS`
+
+error[E0425]: cannot find value `PORTABILITY_MACOS_VERSION` in this scope
+   --> src/26_texture_mapping.rs:664:57
+    |
+664 |     if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+    |                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:670:20
+    |
+670 |     let features = vk::PhysicalDeviceFeatures::builder().sampler_anisotropy(true);
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PhysicalDeviceFeatures;
+    |
+help: if you import `PhysicalDeviceFeatures`, refer to it directly
+    |
+670 -     let features = vk::PhysicalDeviceFeatures::builder().sampler_anisotropy(true);
+670 +     let features = PhysicalDeviceFeatures::builder().sampler_anisotropy(true);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:674:16
+    |
+674 |     let info = vk::DeviceCreateInfo::builder()
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DeviceCreateInfo;
+    |
+help: if you import `DeviceCreateInfo`, refer to it directly
+    |
+674 -     let info = vk::DeviceCreateInfo::builder()
+674 +     let info = DeviceCreateInfo::builder()
+    |
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:694:56
+    |
+694 | unsafe fn create_swapchain(window: &Window, instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                        ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+694 | unsafe fn create_swapchain(window: &Window, instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                        ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:694:75
+    |
+694 | unsafe fn create_swapchain(window: &Window, instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                                           ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:716:9
+    |
+716 |         vk::SharingMode::CONCURRENT
+    |         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SharingMode;
+    |
+help: if you import `SharingMode`, refer to it directly
+    |
+716 -         vk::SharingMode::CONCURRENT
+716 +         SharingMode::CONCURRENT
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:718:9
+    |
+718 |         vk::SharingMode::EXCLUSIVE
+    |         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SharingMode;
+    |
+help: if you import `SharingMode`, refer to it directly
+    |
+718 -         vk::SharingMode::EXCLUSIVE
+718 +         SharingMode::EXCLUSIVE
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:723:16
+    |
+723 |     let info = vk::SwapchainCreateInfoKHR::builder()
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SwapchainCreateInfoKHR;
+    |
+help: if you import `SwapchainCreateInfoKHR`, refer to it directly
+    |
+723 -     let info = vk::SwapchainCreateInfoKHR::builder()
+723 +     let info = SwapchainCreateInfoKHR::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:730:22
+    |
+730 |         .image_usage(vk::ImageUsageFlags::COLOR_ATTACHMENT)
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ImageUsageFlags;
+    |
+help: if you import `ImageUsageFlags`, refer to it directly
+    |
+730 -         .image_usage(vk::ImageUsageFlags::COLOR_ATTACHMENT)
+730 +         .image_usage(ImageUsageFlags::COLOR_ATTACHMENT)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:734:26
+    |
+734 |         .composite_alpha(vk::CompositeAlphaFlagsKHR::OPAQUE)
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::CompositeAlphaFlagsKHR;
+    |
+help: if you import `CompositeAlphaFlagsKHR`, refer to it directly
+    |
+734 -         .composite_alpha(vk::CompositeAlphaFlagsKHR::OPAQUE)
+734 +         .composite_alpha(CompositeAlphaFlagsKHR::OPAQUE)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:737:24
+    |
+737 |         .old_swapchain(vk::SwapchainKHR::null());
+    |                        ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SwapchainKHR;
+    |
+help: if you import `SwapchainKHR`, refer to it directly
+    |
+737 -         .old_swapchain(vk::SwapchainKHR::null());
+737 +         .old_swapchain(SwapchainKHR::null());
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:748:44
+    |
+748 | fn get_swapchain_surface_format(formats: &[vk::SurfaceFormatKHR]) -> vk::SurfaceFormatKHR {
+    |                                            ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:748:70
+    |
+748 | fn get_swapchain_surface_format(formats: &[vk::SurfaceFormatKHR]) -> vk::SurfaceFormatKHR {
+    |                                                                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:752:31
+    |
+752 |         .find(|f| f.format == vk::Format::B8G8R8A8_SRGB && f.color_space == vk::ColorSpaceKHR::SRGB_NONLINEAR)
+    |                               ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::Format;
+    |
+help: if you import `Format`, refer to it directly
+    |
+752 -         .find(|f| f.format == vk::Format::B8G8R8A8_SRGB && f.color_space == vk::ColorSpaceKHR::SRGB_NONLINEAR)
+752 +         .find(|f| f.format == Format::B8G8R8A8_SRGB && f.color_space == vk::ColorSpaceKHR::SRGB_NONLINEAR)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:752:77
+    |
+752 |         .find(|f| f.format == vk::Format::B8G8R8A8_SRGB && f.color_space == vk::ColorSpaceKHR::SRGB_NONLINEAR)
+    |                                                                             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ColorSpaceKHR;
+    |
+help: if you import `ColorSpaceKHR`, refer to it directly
+    |
+752 -         .find(|f| f.format == vk::Format::B8G8R8A8_SRGB && f.color_space == vk::ColorSpaceKHR::SRGB_NONLINEAR)
+752 +         .find(|f| f.format == vk::Format::B8G8R8A8_SRGB && f.color_space == ColorSpaceKHR::SRGB_NONLINEAR)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:756:48
+    |
+756 | fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::PresentModeKHR {
+    |                                                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:756:72
+    |
+756 | fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::PresentModeKHR {
+    |                                                                        ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:760:25
+    |
+760 |         .find(|m| *m == vk::PresentModeKHR::MAILBOX)
+    |                         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PresentModeKHR;
+    |
+help: if you import `PresentModeKHR`, refer to it directly
+    |
+760 -         .find(|m| *m == vk::PresentModeKHR::MAILBOX)
+760 +         .find(|m| *m == PresentModeKHR::MAILBOX)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:761:20
+    |
+761 |         .unwrap_or(vk::PresentModeKHR::FIFO)
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PresentModeKHR;
+    |
+help: if you import `PresentModeKHR`, refer to it directly
+    |
+761 -         .unwrap_or(vk::PresentModeKHR::FIFO)
+761 +         .unwrap_or(PresentModeKHR::FIFO)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:764:56
+    |
+764 | fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
+    |                                                        ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:764:87
+    |
+764 | fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
+    |                                                                                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:768:9
+    |
+768 |         vk::Extent2D::builder()
+    |         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::Extent2D;
+    |
+help: if you import `Extent2D`, refer to it directly
+    |
+768 -         vk::Extent2D::builder()
+768 +         Extent2D::builder()
+    |
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:781:49
+    |
+781 | unsafe fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0412]: cannot find type `Instance` in this scope
+   --> src/26_texture_mapping.rs:795:41
+    |
+795 | unsafe fn create_render_pass(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                         ^^^^^^^^
+    |
+   ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+    |
+155 | pub struct Instant(time::Instant);
+    | ------------------ similarly named struct `Instant` defined here
+    |
+help: a struct with a similar name exists
+    |
+795 | unsafe fn create_render_pass(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                         ~~~~~~~
+help: consider importing one of these structs
+    |
+1   + use ash::Instance;
+    |
+1   + use ash::ext::acquire_drm_display::Instance;
+    |
+1   + use ash::ext::acquire_xlib_display::Instance;
+    |
+1   + use ash::ext::calibrated_timestamps::Instance;
+    |
+      and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:795:60
+    |
+795 | unsafe fn create_render_pass(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                            ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:798:28
+    |
+798 |     let color_attachment = vk::AttachmentDescription::builder()
+    |                            ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentDescription;
+    |
+help: if you import `AttachmentDescription`, refer to it directly
+    |
+798 -     let color_attachment = vk::AttachmentDescription::builder()
+798 +     let color_attachment = AttachmentDescription::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:800:18
+    |
+800 |         .samples(vk::SampleCountFlags::_1)
+    |                  ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SampleCountFlags;
+    |
+help: if you import `SampleCountFlags`, refer to it directly
+    |
+800 -         .samples(vk::SampleCountFlags::_1)
+800 +         .samples(SampleCountFlags::_1)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:801:18
+    |
+801 |         .load_op(vk::AttachmentLoadOp::CLEAR)
+    |                  ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentLoadOp;
+    |
+help: if you import `AttachmentLoadOp`, refer to it directly
+    |
+801 -         .load_op(vk::AttachmentLoadOp::CLEAR)
+801 +         .load_op(AttachmentLoadOp::CLEAR)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:802:19
+    |
+802 |         .store_op(vk::AttachmentStoreOp::STORE)
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentStoreOp;
+    |
+help: if you import `AttachmentStoreOp`, refer to it directly
+    |
+802 -         .store_op(vk::AttachmentStoreOp::STORE)
+802 +         .store_op(AttachmentStoreOp::STORE)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:803:26
+    |
+803 |         .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentLoadOp;
+    |
+help: if you import `AttachmentLoadOp`, refer to it directly
+    |
+803 -         .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
+803 +         .stencil_load_op(AttachmentLoadOp::DONT_CARE)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:804:27
+    |
+804 |         .stencil_store_op(vk::AttachmentStoreOp::DONT_CARE)
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentStoreOp;
+    |
+help: if you import `AttachmentStoreOp`, refer to it directly
+    |
+804 -         .stencil_store_op(vk::AttachmentStoreOp::DONT_CARE)
+804 +         .stencil_store_op(AttachmentStoreOp::DONT_CARE)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:805:25
+    |
+805 |         .initial_layout(vk::ImageLayout::UNDEFINED)
+    |                         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ImageLayout;
+    |
+help: if you import `ImageLayout`, refer to it directly
+    |
+805 -         .initial_layout(vk::ImageLayout::UNDEFINED)
+805 +         .initial_layout(ImageLayout::UNDEFINED)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:806:23
+    |
+806 |         .final_layout(vk::ImageLayout::PRESENT_SRC_KHR);
+    |                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ImageLayout;
+    |
+help: if you import `ImageLayout`, refer to it directly
+    |
+806 -         .final_layout(vk::ImageLayout::PRESENT_SRC_KHR);
+806 +         .final_layout(ImageLayout::PRESENT_SRC_KHR);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:810:32
+    |
+810 |     let color_attachment_ref = vk::AttachmentReference::builder()
+    |                                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AttachmentReference;
+    |
+help: if you import `AttachmentReference`, refer to it directly
+    |
+810 -     let color_attachment_ref = vk::AttachmentReference::builder()
+810 +     let color_attachment_ref = AttachmentReference::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:812:17
+    |
+812 |         .layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+    |                 ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ImageLayout;
+    |
+help: if you import `ImageLayout`, refer to it directly
+    |
+812 -         .layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+812 +         .layout(ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:815:19
+    |
+815 |     let subpass = vk::SubpassDescription::builder()
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SubpassDescription;
+    |
+help: if you import `SubpassDescription`, refer to it directly
+    |
+815 -     let subpass = vk::SubpassDescription::builder()
+815 +     let subpass = SubpassDescription::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:816:30
+    |
+816 |         .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
+    |                              ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineBindPoint;
+    |
+help: if you import `PipelineBindPoint`, refer to it directly
+    |
+816 -         .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
+816 +         .pipeline_bind_point(PipelineBindPoint::GRAPHICS)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:821:22
+    |
+821 |     let dependency = vk::SubpassDependency::builder()
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SubpassDependency;
+    |
+help: if you import `SubpassDependency`, refer to it directly
+    |
+821 -     let dependency = vk::SubpassDependency::builder()
+821 +     let dependency = SubpassDependency::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:822:22
+    |
+822 |         .src_subpass(vk::SUBPASS_EXTERNAL)
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:824:25
+    |
+824 |         .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    |                         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineStageFlags;
+    |
+help: if you import `PipelineStageFlags`, refer to it directly
+    |
+824 -         .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+824 +         .src_stage_mask(PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:825:26
+    |
+825 |         .src_access_mask(vk::AccessFlags::empty())
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AccessFlags;
+    |
+help: if you import `AccessFlags`, refer to it directly
+    |
+825 -         .src_access_mask(vk::AccessFlags::empty())
+825 +         .src_access_mask(AccessFlags::empty())
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:826:25
+    |
+826 |         .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    |                         ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineStageFlags;
+    |
+help: if you import `PipelineStageFlags`, refer to it directly
+    |
+826 -         .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+826 +         .dst_stage_mask(PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:827:26
+    |
+827 |         .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE);
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::AccessFlags;
+    |
+help: if you import `AccessFlags`, refer to it directly
+    |
+827 -         .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE);
+827 +         .dst_access_mask(AccessFlags::COLOR_ATTACHMENT_WRITE);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:834:16
+    |
+834 |     let info = vk::RenderPassCreateInfo::builder()
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::RenderPassCreateInfo;
+    |
+help: if you import `RenderPassCreateInfo`, refer to it directly
+    |
+834 -     let info = vk::RenderPassCreateInfo::builder()
+834 +     let info = RenderPassCreateInfo::builder()
+    |
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:844:49
+    |
+844 | unsafe fn create_descriptor_set_layout(device: &Device, data: &mut AppData) -> Result<()> {
+    |                                                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:845:23
+    |
+845 |     let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
+    |                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DescriptorSetLayoutBinding;
+    |
+help: if you import `DescriptorSetLayoutBinding`, refer to it directly
+    |
+845 -     let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
+845 +     let ubo_binding = DescriptorSetLayoutBinding::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:847:26
+    |
+847 |         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DescriptorType;
+    |
+help: if you import `DescriptorType`, refer to it directly
+    |
+847 -         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+847 +         .descriptor_type(DescriptorType::UNIFORM_BUFFER)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:849:22
+    |
+849 |         .stage_flags(vk::ShaderStageFlags::VERTEX);
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ShaderStageFlags;
+    |
+help: if you import `ShaderStageFlags`, refer to it directly
+    |
+849 -         .stage_flags(vk::ShaderStageFlags::VERTEX);
+849 +         .stage_flags(ShaderStageFlags::VERTEX);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:851:27
+    |
+851 |     let sampler_binding = vk::DescriptorSetLayoutBinding::builder()
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DescriptorSetLayoutBinding;
+    |
+help: if you import `DescriptorSetLayoutBinding`, refer to it directly
+    |
+851 -     let sampler_binding = vk::DescriptorSetLayoutBinding::builder()
+851 +     let sampler_binding = DescriptorSetLayoutBinding::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:853:26
+    |
+853 |         .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DescriptorType;
+    |
+help: if you import `DescriptorType`, refer to it directly
+    |
+853 -         .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+853 +         .descriptor_type(DescriptorType::COMBINED_IMAGE_SAMPLER)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:855:22
+    |
+855 |         .stage_flags(vk::ShaderStageFlags::FRAGMENT);
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ShaderStageFlags;
+    |
+help: if you import `ShaderStageFlags`, refer to it directly
+    |
+855 -         .stage_flags(vk::ShaderStageFlags::FRAGMENT);
+855 +         .stage_flags(ShaderStageFlags::FRAGMENT);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:858:16
+    |
+858 |     let info = vk::DescriptorSetLayoutCreateInfo::builder().bindings(bindings);
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::DescriptorSetLayoutCreateInfo;
+    |
+help: if you import `DescriptorSetLayoutCreateInfo`, refer to it directly
+    |
+858 -     let info = vk::DescriptorSetLayoutCreateInfo::builder().bindings(bindings);
+858 +     let info = DescriptorSetLayoutCreateInfo::builder().bindings(bindings);
+    |
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:865:36
+    |
+865 | unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+    |                                    ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:874:22
+    |
+874 |     let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineShaderStageCreateInfo;
+    |
+help: if you import `PipelineShaderStageCreateInfo`, refer to it directly
+    |
+874 -     let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
+874 +     let vert_stage = PipelineShaderStageCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:875:16
+    |
+875 |         .stage(vk::ShaderStageFlags::VERTEX)
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ShaderStageFlags;
+    |
+help: if you import `ShaderStageFlags`, refer to it directly
+    |
+875 -         .stage(vk::ShaderStageFlags::VERTEX)
+875 +         .stage(ShaderStageFlags::VERTEX)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:879:22
+    |
+879 |     let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineShaderStageCreateInfo;
+    |
+help: if you import `PipelineShaderStageCreateInfo`, refer to it directly
+    |
+879 -     let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
+879 +     let frag_stage = PipelineShaderStageCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:880:16
+    |
+880 |         .stage(vk::ShaderStageFlags::FRAGMENT)
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ShaderStageFlags;
+    |
+help: if you import `ShaderStageFlags`, refer to it directly
+    |
+880 -         .stage(vk::ShaderStageFlags::FRAGMENT)
+880 +         .stage(ShaderStageFlags::FRAGMENT)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:888:30
+    |
+888 |     let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
+    |                              ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineVertexInputStateCreateInfo;
+    |
+help: if you import `PipelineVertexInputStateCreateInfo`, refer to it directly
+    |
+888 -     let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
+888 +     let vertex_input_state = PipelineVertexInputStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:894:32
+    |
+894 |     let input_assembly_state = vk::PipelineInputAssemblyStateCreateInfo::builder()
+    |                                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineInputAssemblyStateCreateInfo;
+    |
+help: if you import `PipelineInputAssemblyStateCreateInfo`, refer to it directly
+    |
+894 -     let input_assembly_state = vk::PipelineInputAssemblyStateCreateInfo::builder()
+894 +     let input_assembly_state = PipelineInputAssemblyStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:895:19
+    |
+895 |         .topology(vk::PrimitiveTopology::TRIANGLE_LIST)
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PrimitiveTopology;
+    |
+help: if you import `PrimitiveTopology`, refer to it directly
+    |
+895 -         .topology(vk::PrimitiveTopology::TRIANGLE_LIST)
+895 +         .topology(PrimitiveTopology::TRIANGLE_LIST)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:900:20
+    |
+900 |     let viewport = vk::Viewport::builder()
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::Viewport;
+    |
+help: if you import `Viewport`, refer to it directly
+    |
+900 -     let viewport = vk::Viewport::builder()
+900 +     let viewport = Viewport::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:908:19
+    |
+908 |     let scissor = vk::Rect2D::builder()
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::Rect2D;
+    |
+help: if you import `Rect2D`, refer to it directly
+    |
+908 -     let scissor = vk::Rect2D::builder()
+908 +     let scissor = Rect2D::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:909:17
+    |
+909 |         .offset(vk::Offset2D { x: 0, y: 0 })
+    |                 ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:914:26
+    |
+914 |     let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
+    |                          ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineViewportStateCreateInfo;
+    |
+help: if you import `PipelineViewportStateCreateInfo`, refer to it directly
+    |
+914 -     let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
+914 +     let viewport_state = PipelineViewportStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:920:31
+    |
+920 |     let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
+    |                               ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineRasterizationStateCreateInfo;
+    |
+help: if you import `PipelineRasterizationStateCreateInfo`, refer to it directly
+    |
+920 -     let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
+920 +     let rasterization_state = PipelineRasterizationStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:923:23
+    |
+923 |         .polygon_mode(vk::PolygonMode::FILL)
+    |                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PolygonMode;
+    |
+help: if you import `PolygonMode`, refer to it directly
+    |
+923 -         .polygon_mode(vk::PolygonMode::FILL)
+923 +         .polygon_mode(PolygonMode::FILL)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:925:20
+    |
+925 |         .cull_mode(vk::CullModeFlags::BACK)
+    |                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::CullModeFlags;
+    |
+help: if you import `CullModeFlags`, refer to it directly
+    |
+925 -         .cull_mode(vk::CullModeFlags::BACK)
+925 +         .cull_mode(CullModeFlags::BACK)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:926:21
+    |
+926 |         .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+    |                     ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::FrontFace;
+    |
+help: if you import `FrontFace`, refer to it directly
+    |
+926 -         .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+926 +         .front_face(FrontFace::COUNTER_CLOCKWISE)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:931:29
+    |
+931 |     let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
+    |                             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineMultisampleStateCreateInfo;
+    |
+help: if you import `PipelineMultisampleStateCreateInfo`, refer to it directly
+    |
+931 -     let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
+931 +     let multisample_state = PipelineMultisampleStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:933:32
+    |
+933 |         .rasterization_samples(vk::SampleCountFlags::_1);
+    |                                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::SampleCountFlags;
+    |
+help: if you import `SampleCountFlags`, refer to it directly
+    |
+933 -         .rasterization_samples(vk::SampleCountFlags::_1);
+933 +         .rasterization_samples(SampleCountFlags::_1);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:937:22
+    |
+937 |     let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    |                      ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineColorBlendAttachmentState;
+    |
+help: if you import `PipelineColorBlendAttachmentState`, refer to it directly
+    |
+937 -     let attachment = vk::PipelineColorBlendAttachmentState::builder()
+937 +     let attachment = PipelineColorBlendAttachmentState::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:938:27
+    |
+938 |         .color_write_mask(vk::ColorComponentFlags::all())
+    |                           ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ColorComponentFlags;
+    |
+help: if you import `ColorComponentFlags`, refer to it directly
+    |
+938 -         .color_write_mask(vk::ColorComponentFlags::all())
+938 +         .color_write_mask(ColorComponentFlags::all())
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:942:29
+    |
+942 |     let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
+    |                             ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineColorBlendStateCreateInfo;
+    |
+help: if you import `PipelineColorBlendStateCreateInfo`, refer to it directly
+    |
+942 -     let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
+942 +     let color_blend_state = PipelineColorBlendStateCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:944:19
+    |
+944 |         .logic_op(vk::LogicOp::COPY)
+    |                   ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::LogicOp;
+    |
+help: if you import `LogicOp`, refer to it directly
+    |
+944 -         .logic_op(vk::LogicOp::COPY)
+944 +         .logic_op(LogicOp::COPY)
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:951:23
+    |
+951 |     let layout_info = vk::PipelineLayoutCreateInfo::builder().set_layouts(set_layouts);
+    |                       ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineLayoutCreateInfo;
+    |
+help: if you import `PipelineLayoutCreateInfo`, refer to it directly
+    |
+951 -     let layout_info = vk::PipelineLayoutCreateInfo::builder().set_layouts(set_layouts);
+951 +     let layout_info = PipelineLayoutCreateInfo::builder().set_layouts(set_layouts);
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:958:16
+    |
+958 |     let info = vk::GraphicsPipelineCreateInfo::builder()
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::GraphicsPipelineCreateInfo;
+    |
+help: if you import `GraphicsPipelineCreateInfo`, refer to it directly
+    |
+958 -     let info = vk::GraphicsPipelineCreateInfo::builder()
+958 +     let info = GraphicsPipelineCreateInfo::builder()
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:971:36
+    |
+971 |         .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+    |                                    ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::PipelineCache;
+    |
+help: if you import `PipelineCache`, refer to it directly
+    |
+971 -         .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+971 +         .create_graphics_pipelines(PipelineCache::null(), &[info], None)?
+    |
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:982:41
+    |
+982 | unsafe fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderModule> {
+    |                                         ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:982:76
+    |
+982 | unsafe fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderModule> {
+    |                                                                            ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this module
+    |
+1   + use ash::vk;
+    |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:984:16
+    |
+984 |     let info = vk::ShaderModuleCreateInfo::builder().code(bytecode.code());
+    |                ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::ShaderModuleCreateInfo;
+    |
+help: if you import `ShaderModuleCreateInfo`, refer to it directly
+    |
+984 -     let info = vk::ShaderModuleCreateInfo::builder().code(bytecode.code());
+984 +     let info = ShaderModuleCreateInfo::builder().code(bytecode.code());
+    |
+
+error[E0412]: cannot find type `Device` in this scope
+   --> src/26_texture_mapping.rs:992:40
+    |
+992 | unsafe fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
+    |                                        ^^^^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+1   + use ash::Device;
+    |
+1   + use ash::amd::buffer_marker::Device;
+    |
+1   + use ash::amd::display_native_hdr::Device;
+    |
+1   + use ash::amd::draw_indirect_count::Device;
+    |
+      and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:998:31
+    |
+998 |             let create_info = vk::FramebufferCreateInfo::builder()
+    |                               ^^ use of undeclared crate or module `vk`
+    |
+help: consider importing this struct
+    |
+1   + use ash::vk::FramebufferCreateInfo;
+    |
+help: if you import `FramebufferCreateInfo`, refer to it directly
+    |
+998 -             let create_info = vk::FramebufferCreateInfo::builder()
+998 +             let create_info = FramebufferCreateInfo::builder()
+    |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1016:42
+     |
+1016 | unsafe fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                          ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1016 | unsafe fn create_command_pool(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                          ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1016:61
+     |
+1016 | unsafe fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                                             ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1019:16
+     |
+1019 |     let info = vk::CommandPoolCreateInfo::builder().queue_family_index(indices.graphics);
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandPoolCreateInfo;
+     |
+help: if you import `CommandPoolCreateInfo`, refer to it directly
+     |
+1019 -     let info = vk::CommandPoolCreateInfo::builder().queue_family_index(indices.graphics);
+1019 +     let info = CommandPoolCreateInfo::builder().queue_family_index(indices.graphics);
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1026:43
+     |
+1026 | unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1026 | unsafe fn create_texture_image(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1026:62
+     |
+1026 | unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                                              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1047:9
+     |
+1047 |         vk::BufferUsageFlags::TRANSFER_SRC,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1047 -         vk::BufferUsageFlags::TRANSFER_SRC,
+1047 +         BufferUsageFlags::TRANSFER_SRC,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1048:9
+     |
+1048 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1048 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1048 +         MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1048:50
+     |
+1048 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |                                                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1048 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1048 +         vk::MemoryPropertyFlags::HOST_COHERENT | MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1053:68
+     |
+1053 |     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+     |                                                                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryMapFlags;
+     |
+help: if you import `MemoryMapFlags`, refer to it directly
+     |
+1053 -     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+1053 +     let memory = device.map_memory(staging_buffer_memory, 0, size, MemoryMapFlags::empty())?;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1067:9
+     |
+1067 |         vk::Format::R8G8B8A8_SRGB,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Format;
+     |
+help: if you import `Format`, refer to it directly
+     |
+1067 -         vk::Format::R8G8B8A8_SRGB,
+1067 +         Format::R8G8B8A8_SRGB,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1068:9
+     |
+1068 |         vk::ImageTiling::OPTIMAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageTiling;
+     |
+help: if you import `ImageTiling`, refer to it directly
+     |
+1068 -         vk::ImageTiling::OPTIMAL,
+1068 +         ImageTiling::OPTIMAL,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1069:9
+     |
+1069 |         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageUsageFlags;
+     |
+help: if you import `ImageUsageFlags`, refer to it directly
+     |
+1069 -         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+1069 +         ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1069:40
+     |
+1069 |         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+     |                                        ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageUsageFlags;
+     |
+help: if you import `ImageUsageFlags`, refer to it directly
+     |
+1069 -         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+1069 +         vk::ImageUsageFlags::SAMPLED | ImageUsageFlags::TRANSFER_DST,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1070:9
+     |
+1070 |         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1070 -         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+1070 +         MemoryPropertyFlags::DEVICE_LOCAL,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1082:9
+     |
+1082 |         vk::Format::R8G8B8A8_SRGB,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Format;
+     |
+help: if you import `Format`, refer to it directly
+     |
+1082 -         vk::Format::R8G8B8A8_SRGB,
+1082 +         Format::R8G8B8A8_SRGB,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1083:9
+     |
+1083 |         vk::ImageLayout::UNDEFINED,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1083 -         vk::ImageLayout::UNDEFINED,
+1083 +         ImageLayout::UNDEFINED,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1084:9
+     |
+1084 |         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1084 -         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+1084 +         ImageLayout::TRANSFER_DST_OPTIMAL,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1093:9
+     |
+1093 |         vk::Format::R8G8B8A8_SRGB,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Format;
+     |
+help: if you import `Format`, refer to it directly
+     |
+1093 -         vk::Format::R8G8B8A8_SRGB,
+1093 +         Format::R8G8B8A8_SRGB,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1094:9
+     |
+1094 |         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1094 -         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+1094 +         ImageLayout::TRANSFER_DST_OPTIMAL,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1095:9
+     |
+1095 |         vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1095 -         vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+1095 +         ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1106:46
+     |
+1106 | unsafe fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1107:77
+     |
+1107 |     data.texture_image_view = create_image_view(device, data.texture_image, vk::Format::R8G8B8A8_SRGB)?;
+     |                                                                             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Format;
+     |
+help: if you import `Format`, refer to it directly
+     |
+1107 -     data.texture_image_view = create_image_view(device, data.texture_image, vk::Format::R8G8B8A8_SRGB)?;
+1107 +     data.texture_image_view = create_image_view(device, data.texture_image, Format::R8G8B8A8_SRGB)?;
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1112:43
+     |
+1112 | unsafe fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1113:16
+     |
+1113 |     let info = vk::SamplerCreateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SamplerCreateInfo;
+     |
+help: if you import `SamplerCreateInfo`, refer to it directly
+     |
+1113 -     let info = vk::SamplerCreateInfo::builder()
+1113 +     let info = SamplerCreateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1114:21
+     |
+1114 |         .mag_filter(vk::Filter::LINEAR)
+     |                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing one of these structs
+     |
+1    + use std::iter::Filter;
+     |
+1    + use ash::vk::Filter;
+     |
+help: if you import `Filter`, refer to it directly
+     |
+1114 -         .mag_filter(vk::Filter::LINEAR)
+1114 +         .mag_filter(Filter::LINEAR)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1115:21
+     |
+1115 |         .min_filter(vk::Filter::LINEAR)
+     |                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing one of these structs
+     |
+1    + use std::iter::Filter;
+     |
+1    + use ash::vk::Filter;
+     |
+help: if you import `Filter`, refer to it directly
+     |
+1115 -         .min_filter(vk::Filter::LINEAR)
+1115 +         .min_filter(Filter::LINEAR)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1116:25
+     |
+1116 |         .address_mode_u(vk::SamplerAddressMode::REPEAT)
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SamplerAddressMode;
+     |
+help: if you import `SamplerAddressMode`, refer to it directly
+     |
+1116 -         .address_mode_u(vk::SamplerAddressMode::REPEAT)
+1116 +         .address_mode_u(SamplerAddressMode::REPEAT)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1117:25
+     |
+1117 |         .address_mode_v(vk::SamplerAddressMode::REPEAT)
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SamplerAddressMode;
+     |
+help: if you import `SamplerAddressMode`, refer to it directly
+     |
+1117 -         .address_mode_v(vk::SamplerAddressMode::REPEAT)
+1117 +         .address_mode_v(SamplerAddressMode::REPEAT)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1118:25
+     |
+1118 |         .address_mode_w(vk::SamplerAddressMode::REPEAT)
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SamplerAddressMode;
+     |
+help: if you import `SamplerAddressMode`, refer to it directly
+     |
+1118 -         .address_mode_w(vk::SamplerAddressMode::REPEAT)
+1118 +         .address_mode_w(SamplerAddressMode::REPEAT)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1121:23
+     |
+1121 |         .border_color(vk::BorderColor::INT_OPAQUE_BLACK)
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BorderColor;
+     |
+help: if you import `BorderColor`, refer to it directly
+     |
+1121 -         .border_color(vk::BorderColor::INT_OPAQUE_BLACK)
+1121 +         .border_color(BorderColor::INT_OPAQUE_BLACK)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1124:21
+     |
+1124 |         .compare_op(vk::CompareOp::ALWAYS)
+     |                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CompareOp;
+     |
+help: if you import `CompareOp`, refer to it directly
+     |
+1124 -         .compare_op(vk::CompareOp::ALWAYS)
+1124 +         .compare_op(CompareOp::ALWAYS)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1125:22
+     |
+1125 |         .mipmap_mode(vk::SamplerMipmapMode::LINEAR);
+     |                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SamplerMipmapMode;
+     |
+help: if you import `SamplerMipmapMode`, refer to it directly
+     |
+1125 -         .mipmap_mode(vk::SamplerMipmapMode::LINEAR);
+1125 +         .mipmap_mode(SamplerMipmapMode::LINEAR);
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1136:43
+     |
+1136 | unsafe fn create_vertex_buffer(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1136 | unsafe fn create_vertex_buffer(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1136:62
+     |
+1136 | unsafe fn create_vertex_buffer(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                                              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1146:9
+     |
+1146 |         vk::BufferUsageFlags::TRANSFER_SRC,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1146 -         vk::BufferUsageFlags::TRANSFER_SRC,
+1146 +         BufferUsageFlags::TRANSFER_SRC,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1147:9
+     |
+1147 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1147 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1147 +         MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1147:50
+     |
+1147 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |                                                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1147 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1147 +         vk::MemoryPropertyFlags::HOST_COHERENT | MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1152:68
+     |
+1152 |     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+     |                                                                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryMapFlags;
+     |
+help: if you import `MemoryMapFlags`, refer to it directly
+     |
+1152 -     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+1152 +     let memory = device.map_memory(staging_buffer_memory, 0, size, MemoryMapFlags::empty())?;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1165:9
+     |
+1165 |         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1165 -         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+1165 +         BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1165:46
+     |
+1165 |         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+     |                                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1165 -         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+1165 +         vk::BufferUsageFlags::TRANSFER_DST | BufferUsageFlags::VERTEX_BUFFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1166:9
+     |
+1166 |         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1166 -         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+1166 +         MemoryPropertyFlags::DEVICE_LOCAL,
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1184:42
+     |
+1184 | unsafe fn create_index_buffer(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                          ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1184 | unsafe fn create_index_buffer(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                          ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1184:61
+     |
+1184 | unsafe fn create_index_buffer(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                                             ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1194:9
+     |
+1194 |         vk::BufferUsageFlags::TRANSFER_SRC,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1194 -         vk::BufferUsageFlags::TRANSFER_SRC,
+1194 +         BufferUsageFlags::TRANSFER_SRC,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1195:9
+     |
+1195 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1195 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1195 +         MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1195:50
+     |
+1195 |         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |                                                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1195 -         vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1195 +         vk::MemoryPropertyFlags::HOST_COHERENT | MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1200:68
+     |
+1200 |     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+     |                                                                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryMapFlags;
+     |
+help: if you import `MemoryMapFlags`, refer to it directly
+     |
+1200 -     let memory = device.map_memory(staging_buffer_memory, 0, size, vk::MemoryMapFlags::empty())?;
+1200 +     let memory = device.map_memory(staging_buffer_memory, 0, size, MemoryMapFlags::empty())?;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1213:9
+     |
+1213 |         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1213 -         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+1213 +         BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1213:46
+     |
+1213 |         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+     |                                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1213 -         vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+1213 +         vk::BufferUsageFlags::TRANSFER_DST | BufferUsageFlags::INDEX_BUFFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1214:9
+     |
+1214 |         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1214 -         vk::MemoryPropertyFlags::DEVICE_LOCAL,
+1214 +         MemoryPropertyFlags::DEVICE_LOCAL,
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1232:45
+     |
+1232 | unsafe fn create_uniform_buffers(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                             ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1232 | unsafe fn create_uniform_buffers(instance: &Instant, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                             ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1232:64
+     |
+1232 | unsafe fn create_uniform_buffers(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+     |                                                                ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1242:13
+     |
+1242 |             vk::BufferUsageFlags::UNIFORM_BUFFER,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferUsageFlags;
+     |
+help: if you import `BufferUsageFlags`, refer to it directly
+     |
+1242 -             vk::BufferUsageFlags::UNIFORM_BUFFER,
+1242 +             BufferUsageFlags::UNIFORM_BUFFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1243:13
+     |
+1243 |             vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1243 -             vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1243 +             MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1243:54
+     |
+1243 |             vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+     |                                                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryPropertyFlags;
+     |
+help: if you import `MemoryPropertyFlags`, refer to it directly
+     |
+1243 -             vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+1243 +             vk::MemoryPropertyFlags::HOST_COHERENT | MemoryPropertyFlags::HOST_VISIBLE,
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1257:43
+     |
+1257 | unsafe fn create_descriptor_pool(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1258:20
+     |
+1258 |     let ubo_size = vk::DescriptorPoolSize::builder()
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorPoolSize;
+     |
+help: if you import `DescriptorPoolSize`, refer to it directly
+     |
+1258 -     let ubo_size = vk::DescriptorPoolSize::builder()
+1258 +     let ubo_size = DescriptorPoolSize::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1259:16
+     |
+1259 |         .type_(vk::DescriptorType::UNIFORM_BUFFER)
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorType;
+     |
+help: if you import `DescriptorType`, refer to it directly
+     |
+1259 -         .type_(vk::DescriptorType::UNIFORM_BUFFER)
+1259 +         .type_(DescriptorType::UNIFORM_BUFFER)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1262:24
+     |
+1262 |     let sampler_size = vk::DescriptorPoolSize::builder()
+     |                        ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorPoolSize;
+     |
+help: if you import `DescriptorPoolSize`, refer to it directly
+     |
+1262 -     let sampler_size = vk::DescriptorPoolSize::builder()
+1262 +     let sampler_size = DescriptorPoolSize::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1263:16
+     |
+1263 |         .type_(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorType;
+     |
+help: if you import `DescriptorType`, refer to it directly
+     |
+1263 -         .type_(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+1263 +         .type_(DescriptorType::COMBINED_IMAGE_SAMPLER)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1267:16
+     |
+1267 |     let info = vk::DescriptorPoolCreateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorPoolCreateInfo;
+     |
+help: if you import `DescriptorPoolCreateInfo`, refer to it directly
+     |
+1267 -     let info = vk::DescriptorPoolCreateInfo::builder()
+1267 +     let info = DescriptorPoolCreateInfo::builder()
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1276:43
+     |
+1276 | unsafe fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1280:16
+     |
+1280 |     let info = vk::DescriptorSetAllocateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorSetAllocateInfo;
+     |
+help: if you import `DescriptorSetAllocateInfo`, refer to it directly
+     |
+1280 -     let info = vk::DescriptorSetAllocateInfo::builder()
+1280 +     let info = DescriptorSetAllocateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1289:20
+     |
+1289 |         let info = vk::DescriptorBufferInfo::builder()
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorBufferInfo;
+     |
+help: if you import `DescriptorBufferInfo`, refer to it directly
+     |
+1289 -         let info = vk::DescriptorBufferInfo::builder()
+1289 +         let info = DescriptorBufferInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1295:25
+     |
+1295 |         let ubo_write = vk::WriteDescriptorSet::builder()
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::WriteDescriptorSet;
+     |
+help: if you import `WriteDescriptorSet`, refer to it directly
+     |
+1295 -         let ubo_write = vk::WriteDescriptorSet::builder()
+1295 +         let ubo_write = WriteDescriptorSet::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1299:30
+     |
+1299 |             .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+     |                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorType;
+     |
+help: if you import `DescriptorType`, refer to it directly
+     |
+1299 -             .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+1299 +             .descriptor_type(DescriptorType::UNIFORM_BUFFER)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1302:20
+     |
+1302 |         let info = vk::DescriptorImageInfo::builder()
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorImageInfo;
+     |
+help: if you import `DescriptorImageInfo`, refer to it directly
+     |
+1302 -         let info = vk::DescriptorImageInfo::builder()
+1302 +         let info = DescriptorImageInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1303:27
+     |
+1303 |             .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+     |                           ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1303 -             .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+1303 +             .image_layout(ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1308:29
+     |
+1308 |         let sampler_write = vk::WriteDescriptorSet::builder()
+     |                             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::WriteDescriptorSet;
+     |
+help: if you import `WriteDescriptorSet`, refer to it directly
+     |
+1308 -         let sampler_write = vk::WriteDescriptorSet::builder()
+1308 +         let sampler_write = WriteDescriptorSet::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1312:30
+     |
+1312 |             .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+     |                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DescriptorType;
+     |
+help: if you import `DescriptorType`, refer to it directly
+     |
+1312 -             .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+1312 +             .descriptor_type(DescriptorType::COMBINED_IMAGE_SAMPLER)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1315:77
+     |
+1315 |         device.update_descriptor_sets(&[ubo_write, sampler_write], &[] as &[vk::CopyDescriptorSet]);
+     |                                                                             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1325:43
+     |
+1325 | unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                           ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1328:25
+     |
+1328 |     let allocate_info = vk::CommandBufferAllocateInfo::builder()
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferAllocateInfo;
+     |
+help: if you import `CommandBufferAllocateInfo`, refer to it directly
+     |
+1328 -     let allocate_info = vk::CommandBufferAllocateInfo::builder()
+1328 +     let allocate_info = CommandBufferAllocateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1330:16
+     |
+1330 |         .level(vk::CommandBufferLevel::PRIMARY)
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferLevel;
+     |
+help: if you import `CommandBufferLevel`, refer to it directly
+     |
+1330 -         .level(vk::CommandBufferLevel::PRIMARY)
+1330 +         .level(CommandBufferLevel::PRIMARY)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1338:20
+     |
+1338 |         let info = vk::CommandBufferBeginInfo::builder();
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferBeginInfo;
+     |
+help: if you import `CommandBufferBeginInfo`, refer to it directly
+     |
+1338 -         let info = vk::CommandBufferBeginInfo::builder();
+1338 +         let info = CommandBufferBeginInfo::builder();
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1342:27
+     |
+1342 |         let render_area = vk::Rect2D::builder()
+     |                           ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Rect2D;
+     |
+help: if you import `Rect2D`, refer to it directly
+     |
+1342 -         let render_area = vk::Rect2D::builder()
+1342 +         let render_area = Rect2D::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1343:21
+     |
+1343 |             .offset(vk::Offset2D::default())
+     |                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Offset2D;
+     |
+help: if you import `Offset2D`, refer to it directly
+     |
+1343 -             .offset(vk::Offset2D::default())
+1343 +             .offset(Offset2D::default())
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1346:33
+     |
+1346 |         let color_clear_value = vk::ClearValue {
+     |                                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1347:20
+     |
+1347 |             color: vk::ClearColorValue {
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1353:20
+     |
+1353 |         let info = vk::RenderPassBeginInfo::builder()
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::RenderPassBeginInfo;
+     |
+help: if you import `RenderPassBeginInfo`, refer to it directly
+     |
+1353 -         let info = vk::RenderPassBeginInfo::builder()
+1353 +         let info = RenderPassBeginInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1359:62
+     |
+1359 |         device.cmd_begin_render_pass(*command_buffer, &info, vk::SubpassContents::INLINE);
+     |                                                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SubpassContents;
+     |
+help: if you import `SubpassContents`, refer to it directly
+     |
+1359 -         device.cmd_begin_render_pass(*command_buffer, &info, vk::SubpassContents::INLINE);
+1359 +         device.cmd_begin_render_pass(*command_buffer, &info, SubpassContents::INLINE);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1360:51
+     |
+1360 |         device.cmd_bind_pipeline(*command_buffer, vk::PipelineBindPoint::GRAPHICS, data.pipeline);
+     |                                                   ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineBindPoint;
+     |
+help: if you import `PipelineBindPoint`, refer to it directly
+     |
+1360 -         device.cmd_bind_pipeline(*command_buffer, vk::PipelineBindPoint::GRAPHICS, data.pipeline);
+1360 +         device.cmd_bind_pipeline(*command_buffer, PipelineBindPoint::GRAPHICS, data.pipeline);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1362:77
+     |
+1362 |         device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, vk::IndexType::UINT16);
+     |                                                                             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::IndexType;
+     |
+help: if you import `IndexType`, refer to it directly
+     |
+1362 -         device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, vk::IndexType::UINT16);
+1362 +         device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, IndexType::UINT16);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1365:13
+     |
+1365 |             vk::PipelineBindPoint::GRAPHICS,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineBindPoint;
+     |
+help: if you import `PipelineBindPoint`, refer to it directly
+     |
+1365 -             vk::PipelineBindPoint::GRAPHICS,
+1365 +             PipelineBindPoint::GRAPHICS,
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1384:40
+     |
+1384 | unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+     |                                        ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1385:26
+     |
+1385 |     let semaphore_info = vk::SemaphoreCreateInfo::builder();
+     |                          ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SemaphoreCreateInfo;
+     |
+help: if you import `SemaphoreCreateInfo`, refer to it directly
+     |
+1385 -     let semaphore_info = vk::SemaphoreCreateInfo::builder();
+1385 +     let semaphore_info = SemaphoreCreateInfo::builder();
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1386:22
+     |
+1386 |     let fence_info = vk::FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
+     |                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::FenceCreateInfo;
+     |
+help: if you import `FenceCreateInfo`, refer to it directly
+     |
+1386 -     let fence_info = vk::FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
+1386 +     let fence_info = FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1386:59
+     |
+1386 |     let fence_info = vk::FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
+     |                                                           ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::FenceCreateFlags;
+     |
+help: if you import `FenceCreateFlags`, refer to it directly
+     |
+1386 -     let fence_info = vk::FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
+1386 +     let fence_info = vk::FenceCreateInfo::builder().flags(FenceCreateFlags::SIGNALED);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1397:66
+     |
+1397 |     data.images_in_flight = data.swapchain_images.iter().map(|_| vk::Fence::null()).collect();
+     |                                                                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Fence;
+     |
+help: if you import `Fence`, refer to it directly
+     |
+1397 -     data.images_in_flight = data.swapchain_images.iter().map(|_| vk::Fence::null()).collect();
+1397 +     data.images_in_flight = data.swapchain_images.iter().map(|_| Fence::null()).collect();
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1403:16
+     |
+1403 |     instance: &Instance,
+     |                ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1403 |     instance: &Instant,
+     |                ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1404:14
+     |
+1404 |     device: &Device,
+     |              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1406:11
+     |
+1406 |     size: vk::DeviceSize,
+     |           ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1407:12
+     |
+1407 |     usage: vk::BufferUsageFlags,
+     |            ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1408:17
+     |
+1408 |     properties: vk::MemoryPropertyFlags,
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1409:14
+     |
+1409 | ) -> Result<(vk::Buffer, vk::DeviceMemory)> {
+     |              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1409:26
+     |
+1409 | ) -> Result<(vk::Buffer, vk::DeviceMemory)> {
+     |                          ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1412:23
+     |
+1412 |     let buffer_info = vk::BufferCreateInfo::builder()
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferCreateInfo;
+     |
+help: if you import `BufferCreateInfo`, refer to it directly
+     |
+1412 -     let buffer_info = vk::BufferCreateInfo::builder()
+1412 +     let buffer_info = BufferCreateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1415:23
+     |
+1415 |         .sharing_mode(vk::SharingMode::EXCLUSIVE);
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SharingMode;
+     |
+help: if you import `SharingMode`, refer to it directly
+     |
+1415 -         .sharing_mode(vk::SharingMode::EXCLUSIVE);
+1415 +         .sharing_mode(SharingMode::EXCLUSIVE);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1423:23
+     |
+1423 |     let memory_info = vk::MemoryAllocateInfo::builder()
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryAllocateInfo;
+     |
+help: if you import `MemoryAllocateInfo`, refer to it directly
+     |
+1423 -     let memory_info = vk::MemoryAllocateInfo::builder()
+1423 +     let memory_info = MemoryAllocateInfo::builder()
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1435:14
+     |
+1435 |     device: &Device,
+     |              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1437:13
+     |
+1437 |     source: vk::Buffer,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1438:18
+     |
+1438 |     destination: vk::Buffer,
+     |                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1439:11
+     |
+1439 |     size: vk::DeviceSize,
+     |           ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1443:19
+     |
+1443 |     let regions = vk::BufferCopy::builder().size(size);
+     |                   ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferCopy;
+     |
+help: if you import `BufferCopy`, refer to it directly
+     |
+1443 -     let regions = vk::BufferCopy::builder().size(size);
+1443 +     let regions = BufferCopy::builder().size(size);
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1456:16
+     |
+1456 |     instance: &Instance,
+     |                ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1456 |     instance: &Instant,
+     |                ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1457:14
+     |
+1457 |     device: &Device,
+     |              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1461:13
+     |
+1461 |     format: vk::Format,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1462:13
+     |
+1462 |     tiling: vk::ImageTiling,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1463:12
+     |
+1463 |     usage: vk::ImageUsageFlags,
+     |            ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1464:17
+     |
+1464 |     properties: vk::MemoryPropertyFlags,
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1465:14
+     |
+1465 | ) -> Result<(vk::Image, vk::DeviceMemory)> {
+     |              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1465:25
+     |
+1465 | ) -> Result<(vk::Image, vk::DeviceMemory)> {
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1468:16
+     |
+1468 |     let info = vk::ImageCreateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageCreateInfo;
+     |
+help: if you import `ImageCreateInfo`, refer to it directly
+     |
+1468 -     let info = vk::ImageCreateInfo::builder()
+1468 +     let info = ImageCreateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1469:21
+     |
+1469 |         .image_type(vk::ImageType::_2D)
+     |                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageType;
+     |
+help: if you import `ImageType`, refer to it directly
+     |
+1469 -         .image_type(vk::ImageType::_2D)
+1469 +         .image_type(ImageType::_2D)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1470:17
+     |
+1470 |         .extent(vk::Extent3D {
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1479:25
+     |
+1479 |         .initial_layout(vk::ImageLayout::UNDEFINED)
+     |                         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1479 -         .initial_layout(vk::ImageLayout::UNDEFINED)
+1479 +         .initial_layout(ImageLayout::UNDEFINED)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1481:23
+     |
+1481 |         .sharing_mode(vk::SharingMode::EXCLUSIVE)
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SharingMode;
+     |
+help: if you import `SharingMode`, refer to it directly
+     |
+1481 -         .sharing_mode(vk::SharingMode::EXCLUSIVE)
+1481 +         .sharing_mode(SharingMode::EXCLUSIVE)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1482:18
+     |
+1482 |         .samples(vk::SampleCountFlags::_1);
+     |                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SampleCountFlags;
+     |
+help: if you import `SampleCountFlags`, refer to it directly
+     |
+1482 -         .samples(vk::SampleCountFlags::_1);
+1482 +         .samples(SampleCountFlags::_1);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1490:16
+     |
+1490 |     let info = vk::MemoryAllocateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::MemoryAllocateInfo;
+     |
+help: if you import `MemoryAllocateInfo`, refer to it directly
+     |
+1490 -     let info = vk::MemoryAllocateInfo::builder()
+1490 +     let info = MemoryAllocateInfo::builder()
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1501:38
+     |
+1501 | unsafe fn create_image_view(device: &Device, image: vk::Image, format: vk::Format) -> Result<vk::ImageView> {
+     |                                      ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1501:53
+     |
+1501 | unsafe fn create_image_view(device: &Device, image: vk::Image, format: vk::Format) -> Result<vk::ImageView> {
+     |                                                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1501:72
+     |
+1501 | unsafe fn create_image_view(device: &Device, image: vk::Image, format: vk::Format) -> Result<vk::ImageView> {
+     |                                                                        ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1501:94
+     |
+1501 | unsafe fn create_image_view(device: &Device, image: vk::Image, format: vk::Format) -> Result<vk::ImageView> {
+     |                                                                                              ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1502:29
+     |
+1502 |     let subresource_range = vk::ImageSubresourceRange::builder()
+     |                             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageSubresourceRange;
+     |
+help: if you import `ImageSubresourceRange`, refer to it directly
+     |
+1502 -     let subresource_range = vk::ImageSubresourceRange::builder()
+1502 +     let subresource_range = ImageSubresourceRange::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1503:22
+     |
+1503 |         .aspect_mask(vk::ImageAspectFlags::COLOR)
+     |                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageAspectFlags;
+     |
+help: if you import `ImageAspectFlags`, refer to it directly
+     |
+1503 -         .aspect_mask(vk::ImageAspectFlags::COLOR)
+1503 +         .aspect_mask(ImageAspectFlags::COLOR)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1509:16
+     |
+1509 |     let info = vk::ImageViewCreateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageViewCreateInfo;
+     |
+help: if you import `ImageViewCreateInfo`, refer to it directly
+     |
+1509 -     let info = vk::ImageViewCreateInfo::builder()
+1509 +     let info = ImageViewCreateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1511:20
+     |
+1511 |         .view_type(vk::ImageViewType::_2D)
+     |                    ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageViewType;
+     |
+help: if you import `ImageViewType`, refer to it directly
+     |
+1511 -         .view_type(vk::ImageViewType::_2D)
+1511 +         .view_type(ImageViewType::_2D)
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1519:14
+     |
+1519 |     device: &Device,
+     |              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1521:12
+     |
+1521 |     image: vk::Image,
+     |            ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1522:13
+     |
+1522 |     format: vk::Format,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1523:17
+     |
+1523 |     old_layout: vk::ImageLayout,
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1524:17
+     |
+1524 |     new_layout: vk::ImageLayout,
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1527:10
+     |
+1527 |         (vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) => (
+     |          ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1527 -         (vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) => (
+1527 +         (ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) => (
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1527:38
+     |
+1527 |         (vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) => (
+     |                                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1527 -         (vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) => (
+1527 +         (vk::ImageLayout::UNDEFINED, ImageLayout::TRANSFER_DST_OPTIMAL) => (
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1528:13
+     |
+1528 |             vk::AccessFlags::empty(),
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::AccessFlags;
+     |
+help: if you import `AccessFlags`, refer to it directly
+     |
+1528 -             vk::AccessFlags::empty(),
+1528 +             AccessFlags::empty(),
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1529:13
+     |
+1529 |             vk::AccessFlags::TRANSFER_WRITE,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::AccessFlags;
+     |
+help: if you import `AccessFlags`, refer to it directly
+     |
+1529 -             vk::AccessFlags::TRANSFER_WRITE,
+1529 +             AccessFlags::TRANSFER_WRITE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1530:13
+     |
+1530 |             vk::PipelineStageFlags::TOP_OF_PIPE,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineStageFlags;
+     |
+help: if you import `PipelineStageFlags`, refer to it directly
+     |
+1530 -             vk::PipelineStageFlags::TOP_OF_PIPE,
+1530 +             PipelineStageFlags::TOP_OF_PIPE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1531:13
+     |
+1531 |             vk::PipelineStageFlags::TRANSFER,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineStageFlags;
+     |
+help: if you import `PipelineStageFlags`, refer to it directly
+     |
+1531 -             vk::PipelineStageFlags::TRANSFER,
+1531 +             PipelineStageFlags::TRANSFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1533:10
+     |
+1533 |         (vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+     |          ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1533 -         (vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+1533 +         (ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1533:49
+     |
+1533 |         (vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+     |                                                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1533 -         (vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+1533 +         (vk::ImageLayout::TRANSFER_DST_OPTIMAL, ImageLayout::SHADER_READ_ONLY_OPTIMAL) => (
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1534:13
+     |
+1534 |             vk::AccessFlags::TRANSFER_WRITE,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::AccessFlags;
+     |
+help: if you import `AccessFlags`, refer to it directly
+     |
+1534 -             vk::AccessFlags::TRANSFER_WRITE,
+1534 +             AccessFlags::TRANSFER_WRITE,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1535:13
+     |
+1535 |             vk::AccessFlags::SHADER_READ,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::AccessFlags;
+     |
+help: if you import `AccessFlags`, refer to it directly
+     |
+1535 -             vk::AccessFlags::SHADER_READ,
+1535 +             AccessFlags::SHADER_READ,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1536:13
+     |
+1536 |             vk::PipelineStageFlags::TRANSFER,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineStageFlags;
+     |
+help: if you import `PipelineStageFlags`, refer to it directly
+     |
+1536 -             vk::PipelineStageFlags::TRANSFER,
+1536 +             PipelineStageFlags::TRANSFER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1537:13
+     |
+1537 |             vk::PipelineStageFlags::FRAGMENT_SHADER,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::PipelineStageFlags;
+     |
+help: if you import `PipelineStageFlags`, refer to it directly
+     |
+1537 -             vk::PipelineStageFlags::FRAGMENT_SHADER,
+1537 +             PipelineStageFlags::FRAGMENT_SHADER,
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1544:23
+     |
+1544 |     let subresource = vk::ImageSubresourceRange::builder()
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageSubresourceRange;
+     |
+help: if you import `ImageSubresourceRange`, refer to it directly
+     |
+1544 -     let subresource = vk::ImageSubresourceRange::builder()
+1544 +     let subresource = ImageSubresourceRange::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1545:22
+     |
+1545 |         .aspect_mask(vk::ImageAspectFlags::COLOR)
+     |                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageAspectFlags;
+     |
+help: if you import `ImageAspectFlags`, refer to it directly
+     |
+1545 -         .aspect_mask(vk::ImageAspectFlags::COLOR)
+1545 +         .aspect_mask(ImageAspectFlags::COLOR)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1551:19
+     |
+1551 |     let barrier = vk::ImageMemoryBarrier::builder()
+     |                   ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageMemoryBarrier;
+     |
+help: if you import `ImageMemoryBarrier`, refer to it directly
+     |
+1551 -     let barrier = vk::ImageMemoryBarrier::builder()
+1551 +     let barrier = ImageMemoryBarrier::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1554:33
+     |
+1554 |         .src_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+     |                                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1555:33
+     |
+1555 |         .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+     |                                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1565:9
+     |
+1565 |         vk::DependencyFlags::empty(),
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::DependencyFlags;
+     |
+help: if you import `DependencyFlags`, refer to it directly
+     |
+1565 -         vk::DependencyFlags::empty(),
+1565 +         DependencyFlags::empty(),
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1566:18
+     |
+1566 |         &[] as &[vk::MemoryBarrier],
+     |                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1567:18
+     |
+1567 |         &[] as &[vk::BufferMemoryBarrier],
+     |                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1577:14
+     |
+1577 |     device: &Device,
+     |              ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1579:13
+     |
+1579 |     buffer: vk::Buffer,
+     |             ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1580:12
+     |
+1580 |     image: vk::Image,
+     |            ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1586:23
+     |
+1586 |     let subresource = vk::ImageSubresourceLayers::builder()
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageSubresourceLayers;
+     |
+help: if you import `ImageSubresourceLayers`, refer to it directly
+     |
+1586 -     let subresource = vk::ImageSubresourceLayers::builder()
+1586 +     let subresource = ImageSubresourceLayers::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1587:22
+     |
+1587 |         .aspect_mask(vk::ImageAspectFlags::COLOR)
+     |                      ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageAspectFlags;
+     |
+help: if you import `ImageAspectFlags`, refer to it directly
+     |
+1587 -         .aspect_mask(vk::ImageAspectFlags::COLOR)
+1587 +         .aspect_mask(ImageAspectFlags::COLOR)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1592:18
+     |
+1592 |     let region = vk::BufferImageCopy::builder()
+     |                  ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::BufferImageCopy;
+     |
+help: if you import `BufferImageCopy`, refer to it directly
+     |
+1592 -     let region = vk::BufferImageCopy::builder()
+1592 +     let region = BufferImageCopy::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1597:23
+     |
+1597 |         .image_offset(vk::Offset3D { x: 0, y: 0, z: 0 })
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1598:23
+     |
+1598 |         .image_extent(vk::Extent3D {
+     |                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1608:9
+     |
+1608 |         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+     |         ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::ImageLayout;
+     |
+help: if you import `ImageLayout`, refer to it directly
+     |
+1608 -         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+1608 +         ImageLayout::TRANSFER_DST_OPTIMAL,
+     |
+
+error[E0412]: cannot find type `Instance` in this scope
+    --> src/26_texture_mapping.rs:1622:16
+     |
+1622 |     instance: &Instance,
+     |                ^^^^^^^^
+     |
+    ::: /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/time.rs:155:1
+     |
+155  | pub struct Instant(time::Instant);
+     | ------------------ similarly named struct `Instant` defined here
+     |
+help: a struct with a similar name exists
+     |
+1622 |     instance: &Instant,
+     |                ~~~~~~~
+help: consider importing one of these structs
+     |
+1    + use ash::Instance;
+     |
+1    + use ash::ext::acquire_drm_display::Instance;
+     |
+1    + use ash::ext::acquire_xlib_display::Instance;
+     |
+1    + use ash::ext::calibrated_timestamps::Instance;
+     |
+       and 44 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1624:17
+     |
+1624 |     properties: vk::MemoryPropertyFlags,
+     |                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1625:19
+     |
+1625 |     requirements: vk::MemoryRequirements,
+     |                   ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1637:47
+     |
+1637 | unsafe fn begin_single_time_commands(device: &Device, data: &AppData) -> Result<vk::CommandBuffer> {
+     |                                               ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1637:81
+     |
+1637 | unsafe fn begin_single_time_commands(device: &Device, data: &AppData) -> Result<vk::CommandBuffer> {
+     |                                                                                 ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1640:16
+     |
+1640 |     let info = vk::CommandBufferAllocateInfo::builder()
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferAllocateInfo;
+     |
+help: if you import `CommandBufferAllocateInfo`, refer to it directly
+     |
+1640 -     let info = vk::CommandBufferAllocateInfo::builder()
+1640 +     let info = CommandBufferAllocateInfo::builder()
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1641:16
+     |
+1641 |         .level(vk::CommandBufferLevel::PRIMARY)
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferLevel;
+     |
+help: if you import `CommandBufferLevel`, refer to it directly
+     |
+1641 -         .level(vk::CommandBufferLevel::PRIMARY)
+1641 +         .level(CommandBufferLevel::PRIMARY)
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1649:16
+     |
+1649 |     let info = vk::CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferBeginInfo;
+     |
+help: if you import `CommandBufferBeginInfo`, refer to it directly
+     |
+1649 -     let info = vk::CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+1649 +     let info = CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1649:60
+     |
+1649 |     let info = vk::CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+     |                                                            ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::CommandBufferUsageFlags;
+     |
+help: if you import `CommandBufferUsageFlags`, refer to it directly
+     |
+1649 -     let info = vk::CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+1649 +     let info = vk::CommandBufferBeginInfo::builder().flags(CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+     |
+
+error[E0412]: cannot find type `Device` in this scope
+    --> src/26_texture_mapping.rs:1656:45
+     |
+1656 | unsafe fn end_single_time_commands(device: &Device, data: &AppData, command_buffer: vk::CommandBuffer) -> Result<()> {
+     |                                             ^^^^^^ not found in this scope
+     |
+help: consider importing one of these structs
+     |
+1    + use ash::Device;
+     |
+1    + use ash::amd::buffer_marker::Device;
+     |
+1    + use ash::amd::display_native_hdr::Device;
+     |
+1    + use ash::amd::draw_indirect_count::Device;
+     |
+       and 113 other candidates
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1656:85
+     |
+1656 | unsafe fn end_single_time_commands(device: &Device, data: &AppData, command_buffer: vk::CommandBuffer) -> Result<()> {
+     |                                                                                     ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this module
+     |
+1    + use ash::vk;
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1664:16
+     |
+1664 |     let info = vk::SubmitInfo::builder().command_buffers(command_buffers);
+     |                ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::SubmitInfo;
+     |
+help: if you import `SubmitInfo`, refer to it directly
+     |
+1664 -     let info = vk::SubmitInfo::builder().command_buffers(command_buffers);
+1664 +     let info = SubmitInfo::builder().command_buffers(command_buffers);
+     |
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+    --> src/26_texture_mapping.rs:1666:55
+     |
+1666 |     device.queue_submit(data.graphics_queue, &[info], vk::Fence::null())?;
+     |                                                       ^^ use of undeclared crate or module `vk`
+     |
+help: consider importing this struct
+     |
+1    + use ash::vk::Fence;
+     |
+help: if you import `Fence`, refer to it directly
+     |
+1666 -     device.queue_submit(data.graphics_queue, &[info], vk::Fence::null())?;
+1666 +     device.queue_submit(data.graphics_queue, &[info], Fence::null())?;
+     |
+
+warning: unused import: `raw_window_handle::RawWindowHandle`
+  --> src/26_texture_mapping.rs:15:5
+   |
+15 | use raw_window_handle::RawWindowHandle;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `ash::vk::ExtensionProperties`
+  --> src/26_texture_mapping.rs:18:5
+   |
+18 | use ash::vk::ExtensionProperties;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk_window`
+   --> src/26_texture_mapping.rs:236:24
+    |
+236 |         data.surface = vk_window::create_surface(&instance, &window, &window)?;
+    |                        ^^^^^^^^^ use of undeclared crate or module `vk_window`
+
+error[E0599]: no method named `acquire_next_image_khr` found for struct `ash::Device` in the current scope
+    --> src/26_texture_mapping.rs:276:34
+     |
+276  |         let result = self.device.acquire_next_image_khr(
+     |                      ------------^^^^^^^^^^^^^^^^^^^^^^
+     |
+help: there is a method `create_image` with a similar name, but with different arguments
+    --> /home/yoimiya/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ash-0.38.0+1.3.281/src/device.rs:2590:5
+     |
+2590 | /     pub unsafe fn create_image(
+2591 | |         &self,
+2592 | |         create_info: &vk::ImageCreateInfo<'_>,
+2593 | |         allocation_callbacks: Option<&vk::AllocationCallbacks<'_>>,
+2594 | |     ) -> VkResult<vk::Image> {
+     | |____________________________^
+
+error[E0282]: type annotations needed
+   --> src/26_texture_mapping.rs:286:34
+    |
+286 |             Err(e) => return Err(anyhow::anyhow!(e)),
+    |                                  ^^^^^^^^^^^^^^^^^^ cannot infer type
+    |
+    = note: this error originates in the macro `anyhow::anyhow` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0599]: no method named `is_null` found for struct `Fence` in the current scope
+   --> src/26_texture_mapping.rs:290:29
+    |
+290 |         if !image_in_flight.is_null() {
+    |                             ^^^^^^^ method not found in `Fence`
+    |
+   ::: /home/yoimiya/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ash-0.38.0+1.3.281/src/vk.rs:63:8
+    |
+63  |     fn is_null(self) -> bool {
+    |        ------- the method is available for `Fence` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+help: trait `Handle` which provides `is_null` is implemented but not in scope; perhaps you want to import it
+    |
+1   + use ash::vk::Handle;
+    |
+
+error[E0599]: no method named `queue_present_khr` found for struct `ash::Device` in the current scope
+   --> src/26_texture_mapping.rs:323:14
+    |
+321 |           let result = self
+    |  ______________________-
+322 | |             .device
+323 | |             .queue_present_khr(self.data.present_queue, &present_info);
+    | |             -^^^^^^^^^^^^^^^^^ method not found in `Device`
+    | |_____________|
+    |
+
+error[E0282]: type annotations needed
+   --> src/26_texture_mapping.rs:330:24
+    |
+330 |             return Err(anyhow::anyhow!(e));
+    |                        ^^^^^^^^^^^^^^^^^^ cannot infer type
+    |
+    = note: this error originates in the macro `anyhow::anyhow` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `vec3` in this scope
+   --> src/26_texture_mapping.rs:344:43
+    |
+344 |         let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(90.0) * time);
+    |                                           ^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `Deg` in this scope
+   --> src/26_texture_mapping.rs:344:64
+    |
+344 |         let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(90.0) * time);
+    |                                                                ^^^ not found in this scope
+
+error[E0423]: expected function, tuple struct or tuple variant, found type alias `Point3`
+   --> src/26_texture_mapping.rs:347:13
+    |
+347 |             Point3(2.0, 2.0, 2.0),
+    |             ^^^^^^
+    |
+    = note: can't use a type alias as a constructor
+
+error[E0423]: expected function, tuple struct or tuple variant, found type alias `Point3`
+   --> src/26_texture_mapping.rs:348:13
+    |
+348 |             Point3(0.0, 0.0, 0.0),
+    |             ^^^^^^
+    |
+    = note: can't use a type alias as a constructor
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:349:13
+    |
+346 |         let view = Mat4::look_at_rh(
+    |                    ---------------- arguments to this function are incorrect
+...
+349 |             Vec3::new(0.0, 0.0, 1.0),
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^ expected `&Matrix<f32, Const<3>, ..., ...>`, found `Matrix<f32, Const<3>, ..., ...>`
+    |
+    = note: expected reference `&Matrix<_, _, _, _>`
+                  found struct `Matrix<_, _, _, _>`
+note: associated function defined here
+   --> /home/yoimiya/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nalgebra-0.33.2/src/base/cg.rs:198:12
+    |
+198 |     pub fn look_at_rh(eye: &Point3<T>, target: &Point3<T>, up: &Vector3<T>) -> Self {
+    |            ^^^^^^^^^^
+help: consider borrowing here
+    |
+349 |             &Vec3::new(0.0, 0.0, 1.0),
+    |             +
+
+error[E0425]: cannot find function, tuple struct or tuple variant `Deg` in this scope
+   --> src/26_texture_mapping.rs:353:13
+    |
+353 |             Deg(45.0),
+    |             ^^^ not found in this scope
+
+error[E0599]: no method named `destroy_surface_khr` found for struct `ash::Instance` in the current scope
+   --> src/26_texture_mapping.rs:432:23
+    |
+432 |         self.instance.destroy_surface_khr(self.data.surface, None);
+    |                       ^^^^^^^^^^^^^^^^^^^ method not found in `Instance`
+
+error[E0599]: no method named `destroy_debug_utils_messenger_ext` found for struct `ash::Instance` in the current scope
+   --> src/26_texture_mapping.rs:436:18
+    |
+435 | /             self.instance
+436 | |                 .destroy_debug_utils_messenger_ext(self.data.messenger, None);
+    | |                 -^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `Instance`
+    | |_________________|
+    |
+
+error[E0599]: no method named `destroy_swapchain_khr` found for struct `ash::Device` in the current scope
+   --> src/26_texture_mapping.rs:467:21
+    |
+467 |         self.device.destroy_swapchain_khr(self.data.swapchain, None);
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+    |
+help: there is a method `destroy_sampler` with a similar name
+    |
+467 |         self.device.destroy_sampler(self.data.swapchain, None);
+    |                     ~~~~~~~~~~~~~~~
+
+error[E0308]: mismatched types
+    --> src/26_texture_mapping.rs:477:22
+     |
+477  |         .engine_name(b"No Engine\0")
+     |          ----------- ^^^^^^^^^^^^^^ expected `&CStr`, found `&[u8; 10]`
+     |          |
+     |          arguments to this method are incorrect
+     |
+     = note: expected reference `&CStr`
+                found reference `&'static [u8; 10]`
+note: method defined here
+    --> /home/yoimiya/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ash-0.38.0+1.3.281/src/vk/definitions.rs:1121:12
+     |
+1121 |     pub fn engine_name(mut self, engine_name: &'a CStr) -> Self {
+     |            ^^^^^^^^^^^
+
+error[E0277]: the trait bound `[i8; 256]: Borrow<&[&[u8]]>` is not satisfied
+   --> src/26_texture_mapping.rs:489:57
+    |
+489 |     if VALIDATION_ENABLED && !available_layers.contains(&VALIDATION_LAYERS) {
+    |                                                -------- ^^^^^^^^^^^^^^^^^^ the trait `Borrow<&[&[u8]]>` is not implemented for `[i8; 256]`
+    |                                                |
+    |                                                required by a bound introduced by this call
+    |
+    = help: the trait `Borrow<&[&[u8]]>` is not implemented for `[i8; 256]`
+            but trait `Borrow<[i8]>` is implemented for it
+    = help: for that trait implementation, expected `[i8]`, found `&[&[u8]]`
+note: required by a bound in `HashSet::<T, S>::contains`
+   --> /home/yoimiya/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/collections/hash/set.rs:694:12
+    |
+692 |     pub fn contains<Q: ?Sized>(&self, value: &Q) -> bool
+    |            -------- required by a bound in this associated function
+693 |     where
+694 |         T: Borrow<Q>,
+    |            ^^^^^^^^^ required by this bound in `HashSet::<T, S>::contains`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk_window`
+   --> src/26_texture_mapping.rs:501:26
+    |
+501 |     let mut extensions = vk_window::get_required_instance_extensions(window)
+    |                          ^^^^^^^^^ use of undeclared crate or module `vk_window`
+
+error[E0599]: no method named `version` found for reference `&ash::Entry` in the current scope
+   --> src/26_texture_mapping.rs:507:55
+    |
+507 |     let flags = if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+    |                                                       ^^^^^^^ method not found in `&Entry`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:510:25
+    |
+510 |         extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
+    |                         ^^ use of undeclared crate or module `vk`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:517:25
+    |
+517 |         extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.as_ptr());
+    |                         ^^ use of undeclared crate or module `vk`
+
+error[E0599]: no method named `create_debug_utils_messenger_ext` found for struct `ash::Instance` in the current scope
+   --> src/26_texture_mapping.rs:546:35
+    |
+546 |         data.messenger = instance.create_debug_utils_messenger_ext(&debug_info, None)?;
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `Instance`
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:599:39
+    |
+599 |     QueueFamilyIndices::get(instance, data, physical_device)?;
+    |     -----------------------           ^^^^ expected `&VulkanApp`, found `&AppData`
+    |     |
+    |     arguments to this function are incorrect
+    |
+    = note: expected reference `&VulkanApp`
+               found reference `&AppData`
+note: associated function defined here
+   --> src/26_texture_mapping.rs:43:15
+    |
+43  |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+    |               ^^^                           ---------------
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:602:51
+    |
+602 |     let support = SwapchainSupport::get(instance, data, physical_device)?;
+    |                   ---------------------           ^^^^ expected `&VulkanApp`, found `&AppData`
+    |                   |
+    |                   arguments to this function are incorrect
+    |
+    = note: expected reference `&VulkanApp`
+               found reference `&AppData`
+note: associated function defined here
+   --> src/26_texture_mapping.rs:78:15
+    |
+78  |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+    |               ^^^                           ---------------
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:635:53
+    |
+635 |     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
+    |                   -----------------------           ^^^^ expected `&VulkanApp`, found `&mut AppData`
+    |                   |
+    |                   arguments to this function are incorrect
+    |
+    = note:      expected reference `&VulkanApp`
+            found mutable reference `&mut AppData`
+note: associated function defined here
+   --> src/26_texture_mapping.rs:43:15
+    |
+43  |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+    |               ^^^                           ---------------
+
+error[E0433]: failed to resolve: use of undeclared crate or module `vk`
+   --> src/26_texture_mapping.rs:665:25
+    |
+665 |         extensions.push(vk::KHR_PORTABILITY_SUBSET_EXTENSION.name.as_ptr());
+    |                         ^^ use of undeclared crate or module `vk`
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:697:53
+    |
+697 |     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
+    |                   -----------------------           ^^^^ expected `&VulkanApp`, found `&mut AppData`
+    |                   |
+    |                   arguments to this function are incorrect
+    |
+    = note:      expected reference `&VulkanApp`
+            found mutable reference `&mut AppData`
+note: associated function defined here
+   --> src/26_texture_mapping.rs:43:15
+    |
+43  |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+    |               ^^^                           ---------------
+
+error[E0308]: mismatched types
+   --> src/26_texture_mapping.rs:698:51
+    |
+698 |     let support = SwapchainSupport::get(instance, data, data.physical_device)?;
+    |                   ---------------------           ^^^^ expected `&VulkanApp`, found `&mut AppData`
+    |                   |
+    |                   arguments to this function are incorrect
+    |
+    = note:      expected reference `&VulkanApp`
+            found mutable reference `&mut AppData`
+note: associated function defined here
+   --> src/26_texture_mapping.rs:78:15
+    |
+78  |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+    |               ^^^                           ---------------
+
+error[E0433]: failed to resolve: use of undeclared type `Bytecode`
+   --> src/26_texture_mapping.rs:983:20
+    |
+983 |     let bytecode = Bytecode::new(bytecode).unwrap();
+    |                    ^^^^^^^^ use of undeclared type `Bytecode`
+
+error[E0308]: mismatched types
+    --> src/26_texture_mapping.rs:1017:53
+     |
+1017 |     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
+     |                   -----------------------           ^^^^ expected `&VulkanApp`, found `&mut AppData`
+     |                   |
+     |                   arguments to this function are incorrect
+     |
+     = note:      expected reference `&VulkanApp`
+             found mutable reference `&mut AppData`
+note: associated function defined here
+    --> src/26_texture_mapping.rs:43:15
+     |
+43   |     unsafe fn get(instance: &ash::Instance, app: &VulkanApp, physical_device: ash::vk::PhysicalDevice) -> Result<Self> {
+     |               ^^^                           ---------------
+
+warning: unused variable: `properties`
+  --> src/26_texture_mapping.rs:55:21
+   |
+55 |         for (index, properties) in properties.iter().enumerate() {
+   |                     ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_properties`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+Some errors have detailed explanations: E0277, E0282, E0308, E0412, E0423, E0425, E0433, E0599.
+For more information about an error, try `rustc --explain E0277`.
+warning: `vulkan-tutorial-rust` (bin "26_texture_mapping") generated 3 warnings
+error: could not compile `vulkan-tutorial-rust` (bin "26_texture_mapping") due to 322 previous errors; 3 warnings emitted
