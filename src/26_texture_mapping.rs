@@ -411,7 +411,7 @@ impl VulkanApp {
     /// Updates the uniform buffer for the current frame.
     fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
         let time = self.start.elapsed().as_secs_f32();
-        let rotation_speed = 1.0;
+        let rotation_speed = 1.5;
         let model = Mat4::from_axis_angle(&Vec3::z_axis(), rotation_speed * time);
         let view = Mat4::look_at_rh(
             &Point3::new(2.0, 2.0, 2.0),
@@ -640,7 +640,6 @@ impl VulkanApp {
 // Subsection: Instance and Debug Setup
 //--------------------------------------------------------------------------------------------------
 
-/// Creates a Vulkan instance and sets up debug messaging if enabled.
 /// Creates a Vulkan instance and sets up debug messaging if enabled.
 fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // anyhow::Result

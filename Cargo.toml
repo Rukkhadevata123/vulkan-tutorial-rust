@@ -4,22 +4,36 @@ version = "0.1.0"
 edition = "2024"
 build = "build.rs"
 
+# Core Dependencies
 [dependencies]
+# Windowing and Input System
 winit = "0.30"
-ash = "0.38"
-image = "0.25"
-nalgebra = "0.33"
-tobj = "4"
-anyhow = "1"
-pretty_env_logger = "0.5"
-log = "0.4"
-libloading = "0.8"
-thiserror = "2"
-raw-window-handle = "0.6"
+raw-window-handle = "0.6" # Required by winit for platform-specific window handles
 
+# Vulkan API Bindings
+ash = "0.38" # Low-level Vulkan bindings
+
+# Utility Crates
+image = "0.25"             # For loading texture images
+nalgebra = "0.33"          # For linear algebra (vectors, matrices)
+tobj = "4"                 # For loading .obj 3D models (if used in examples)
+
+# Error Handling
+anyhow = "1"               # Flexible error handling
+thiserror = "2"            # For creating custom error types
+
+# Logging
+log = "0.4"                # Logging facade
+pretty_env_logger = "0.5"  # Environment-based logger with pretty output
+
+# Dynamic Library Loading
+libloading = "0.8"         # Used by Ash to load the Vulkan loader/runtime
+
+# Build-time Dependencies
 [build-dependencies]
-walkdir = "2"
+walkdir = "2"              # To find shader files in the build script
 
+# Binary Targets
 [[bin]]
 name = "26_texture_mapping"
 path = "src/26_texture_mapping.rs"
