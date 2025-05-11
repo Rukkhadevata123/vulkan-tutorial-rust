@@ -43,6 +43,10 @@ name = "27_depth_buffering"
 path = "src/27_depth_buffering.rs"
 
 [[bin]]
+name = "28_model_loading"
+path = "src/28_model_loading.rs"
+
+[[bin]]
 name = "winit_example"
 path = "src/winit_example.rs"
 
