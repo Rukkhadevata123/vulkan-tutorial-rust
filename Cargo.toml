@@ -39,6 +39,10 @@ name = "26_texture_mapping"
 path = "src/26_texture_mapping.rs"
 
 [[bin]]
+name = "27_depth_buffering"
+path = "src/27_depth_buffering.rs"
+
+[[bin]]
 name = "winit_example"
 path = "src/winit_example.rs"
 
