@@ -6,7 +6,7 @@ It aims to provide a clear and modern example of using the Ash crate for Vulkan 
 
 ## Current Example
 
-The main example currently implemented is `28_model_loading`, which demonstrates how to load and render 3D models using Vulkan.
+The main example currently implemented is `30_multisampling`, which demonstrates how to set up multisampling in Vulkan.
 
 ## How to Run
 
