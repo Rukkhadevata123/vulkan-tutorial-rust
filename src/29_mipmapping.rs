@@ -287,6 +287,7 @@ struct AppData {
     // Command Pool
     command_pool: vk::CommandPool,
     // Texture
+    mip_levels: u32,
     texture_image: vk::Image,
     texture_image_memory: vk::DeviceMemory,
     texture_image_view: vk::ImageView,
@@ -1184,6 +1185,7 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
                 image,
                 data.swapchain_format,
                 vk::ImageAspectFlags::COLOR,
+                1,
             )
         })
         .collect::<Result<Vec<_>, _>>()?;
@@ -1460,6 +1462,7 @@ fn create_depth_objects(instance: &Instance, device: &Device, data: &mut AppData
         data,
         data.swapchain_extent.width,
         data.swapchain_extent.height,
+        1,
         format,
         vk::ImageTiling::OPTIMAL,
         vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
@@ -1468,7 +1471,7 @@ fn create_depth_objects(instance: &Instance, device: &Device, data: &mut AppData
     data.depth_image = depth_image;
     data.depth_image_memory = depth_image_memory;
     data.depth_image_view =
-        create_image_view_internal(device, depth_image, format, vk::ImageAspectFlags::DEPTH)?;
+        create_image_view_internal(device, depth_image, format, vk::ImageAspectFlags::DEPTH, 1)?;
     transition_image_layout_internal(
         device,
         data,
@@ -1476,6 +1479,7 @@ fn create_depth_objects(instance: &Instance, device: &Device, data: &mut AppData
         format,
         vk::ImageLayout::UNDEFINED,
         vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
+        1,
     )?;
     Ok(())
 }
@@ -1499,6 +1503,8 @@ fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData
     }
     let image_data = img.into_raw();
     let image_size = (width * height * 4) as vk::DeviceSize;
+
+    data.mip_levels = (width.max(height) as f32).log2().floor() as u32 + 1;
 
     let (staging_buffer, staging_buffer_memory) = create_buffer_internal(
         instance,
@@ -1528,9 +1534,12 @@ fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData
         data,
         width,
         height,
+        data.mip_levels,
         vk::Format::R8G8B8A8_SRGB,
         vk::ImageTiling::OPTIMAL,
-        vk::ImageUsageFlags::TRANSFER_DST | vk::ImageUsageFlags::SAMPLED,
+        vk::ImageUsageFlags::SAMPLED
+            | vk::ImageUsageFlags::TRANSFER_DST
+            | vk::ImageUsageFlags::TRANSFER_SRC,
         vk::MemoryPropertyFlags::DEVICE_LOCAL,
     )?;
 
@@ -1544,16 +1553,18 @@ fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData
         vk::Format::R8G8B8A8_SRGB,
         vk::ImageLayout::UNDEFINED,
         vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+        data.mip_levels,
     )?;
     copy_buffer_to_image_internal(device, data, staging_buffer, texture_image, width, height)?;
-    transition_image_layout_internal(
-        device,
-        data,
-        texture_image,
-        vk::Format::R8G8B8A8_SRGB,
-        vk::ImageLayout::TRANSFER_DST_OPTIMAL,
-        vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
-    )?;
+    // transition_image_layout_internal(
+    //     device,
+    //     data,
+    //     texture_image,
+    //     vk::Format::R8G8B8A8_SRGB,
+    //     vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+    //     vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+    //     data.mip_levels,
+    // )?;
 
     // SAFETY: `destroy_buffer` and `free_memory` are unsafe. Buffer and memory must be valid.
     unsafe {
@@ -1564,6 +1575,16 @@ fn create_texture_image(instance: &Instance, device: &Device, data: &mut AppData
             device.free_memory(staging_buffer_memory, None);
         }
     }
+    generate_mipmaps(
+        instance,
+        device,
+        data,
+        data.texture_image,
+        vk::Format::R8G8B8A8_SRGB,
+        width,
+        height,
+        data.mip_levels,
+    )?;
     Ok(())
 }
 
@@ -1574,6 +1595,7 @@ fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> 
         data.texture_image,
         vk::Format::R8G8B8A8_SRGB,
         vk::ImageAspectFlags::COLOR,
+        data.mip_levels,
     )?;
     Ok(())
 }
@@ -1598,10 +1620,204 @@ fn create_texture_sampler(device: &Device, instance: &Instance, data: &mut AppDa
         .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
         .mip_lod_bias(0.0)
         .min_lod(0.0)
-        .max_lod(0.0); // Set to actual mip levels if using mipmapping
+        .max_lod(data.mip_levels as f32); // Set to actual mip levels if using mipmapping
 
     // SAFETY: `create_sampler` is unsafe. Device and create_info must be valid.
     data.texture_sampler = unsafe { device.create_sampler(&create_info, None)? };
+    Ok(())
+}
+
+/// Generate Mip Maps
+fn generate_mipmaps(
+    instance: &Instance,
+    device: &Device,
+    data: &AppData,     // AppData 包含物理设备句柄等信息
+    image: vk::Image,   // 要为其生成 mipmap 的图像
+    format: vk::Format, // 图像的格式
+    width: u32,         // 图像的原始宽度 (mip 0)
+    height: u32,        // 图像的原始高度 (mip 0)
+    mip_levels: u32,    // 总共的 mipmap 层级数 (包括原始图像 mip 0)
+) -> Result<()> {
+    // 1. 检查物理设备是否支持对该格式进行线性过滤的 blit 操作
+    // Blit (Block Image Transfer) 是一种通用的图像复制操作，可以进行缩放和格式转换。
+    // 为了生成高质量的 mipmap（通过平滑缩放），我们需要线性过滤。
+    unsafe {
+        if !instance
+            .get_physical_device_format_properties(data.physical_device, format)
+            .optimal_tiling_features // 我们通常对优化平铺的图像（OPTIMAL_TILING）生成 mipmap
+            .contains(vk::FormatFeatureFlags::SAMPLED_IMAGE_FILTER_LINEAR)
+        {
+            // 如果不支持线性过滤的 blit，则无法生成高质量 mipmap，返回错误。
+            return Err(anyhow!(
+                "Texture image format does not support linear blitting!"
+            ));
+        }
+    }
+
+    // 2. 开始一个一次性的命令缓冲区
+    // Mipmap 生成通常是一次性操作，在纹理加载时执行。
+    // begin_single_time_commands_internal 会创建一个命令缓冲区，并开始记录命令。
+    let command_buffer = begin_single_time_commands_internal(device, data)?;
+
+    // 3. 定义一个通用的图像子资源范围 (ImageSubresourceRange)
+    // 这个范围将用于图像内存屏障 (ImageMemoryBarrier) 中，以指定屏障作用于图像的哪个部分。
+    // 这里我们一次只处理一个 mip 层级 (level_count(1)) 的颜色方面 (aspect_mask(vk::ImageAspectFlags::COLOR))。
+    let subresource = vk::ImageSubresourceRange::default()
+        .aspect_mask(vk::ImageAspectFlags::COLOR)
+        .base_array_layer(0) // 对于非数组纹理，基础数组层为 0
+        .layer_count(1) // 对于非数组纹理，层数为 1
+        .level_count(1); // 屏障一次只影响一个 mip 层级
+
+    // 4. 初始化一个可变的图像内存屏障 (ImageMemoryBarrier)
+    // 这个屏障结构将在循环中被重复使用和修改，以转换不同 mip 层级的布局。
+    let mut barrier = vk::ImageMemoryBarrier::default()
+        .image(image) // 指定要操作的图像
+        .src_queue_family_index(vk::QUEUE_FAMILY_IGNORED) // 如果不改变队列族所有权，则忽略
+        .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED) // 同上
+        .subresource_range(subresource); // 使用上面定义的子资源范围
+
+    // 追踪当前 mip 层的尺寸，初始为原始图像尺寸
+    let mut mip_width = width;
+    let mut mip_height = height;
+
+    // 5. 循环生成每个 mipmap 层级 (从第 1 层到 mip_levels - 1)
+    // mip 0 是原始图像，已经存在。
+    for i in 1..mip_levels {
+        // a. 转换 Mip 层级 `i-1` (源层) 的布局：从 `TRANSFER_DST` 到 `TRANSFER_SRC`
+        //    因为我们将从 `i-1` 层读取数据来生成 `i` 层。
+        barrier.subresource_range.base_mip_level = i - 1; // 目标是上一层 mip
+        barrier.old_layout = vk::ImageLayout::TRANSFER_DST_OPTIMAL; // 上一层 mip 在被写入后处于此布局
+        barrier.new_layout = vk::ImageLayout::TRANSFER_SRC_OPTIMAL; // 转换为适合作为传输源的布局
+        barrier.src_access_mask = vk::AccessFlags::TRANSFER_WRITE; // 上一个操作是写入此 mip 层
+        barrier.dst_access_mask = vk::AccessFlags::TRANSFER_READ; // 下一个操作将从此 mip 层读取
+
+        // 记录管线屏障命令
+        unsafe {
+            device.cmd_pipeline_barrier(
+                command_buffer,
+                vk::PipelineStageFlags::TRANSFER, // 源阶段：上一个传输操作完成
+                vk::PipelineStageFlags::TRANSFER, // 目标阶段：下一个传输操作（blit）将开始
+                vk::DependencyFlags::empty(),     // 无依赖
+                &[] as &[vk::MemoryBarrier],      // 无内存屏障
+                &[] as &[vk::BufferMemoryBarrier], // 无缓冲区内存屏障
+                &[barrier],                       // 应用图像内存屏障
+            );
+        }
+
+        // b. 定义 Blit 操作
+        //    `src_subresource`：定义源 mip 层 (i-1)
+        let src_subresource = vk::ImageSubresourceLayers::default()
+            .aspect_mask(vk::ImageAspectFlags::COLOR)
+            .mip_level(i - 1) // 源 mip 层级
+            .base_array_layer(0)
+            .layer_count(1);
+
+        //    `dst_subresource`：定义目标 mip 层 (i)
+        let dst_subresource = vk::ImageSubresourceLayers::default()
+            .aspect_mask(vk::ImageAspectFlags::COLOR)
+            .mip_level(i) // 目标 mip 层级
+            .base_array_layer(0)
+            .layer_count(1);
+
+        //    `blit` 结构：描述如何从源复制到目标
+        let blit = vk::ImageBlit::default()
+            .src_offsets([
+                // 源区域的两个对角点 (x,y,z)
+                vk::Offset3D { x: 0, y: 0, z: 0 }, // 第一个点 (min)
+                vk::Offset3D {
+                    // 第二个点 (max)
+                    x: mip_width as i32,  // 源宽度
+                    y: mip_height as i32, // 源高度
+                    z: 1,                 // 深度为 1 (2D 图像)
+                },
+            ])
+            .src_subresource(src_subresource) // 指定源子资源
+            .dst_offsets([
+                // 目标区域的两个对角点
+                vk::Offset3D { x: 0, y: 0, z: 0 },
+                vk::Offset3D {
+                    // 目标宽度是源宽度的一半 (最小为 1)
+                    x: (if mip_width > 1 { mip_width / 2 } else { 1 }) as i32,
+                    // 目标高度是源高度的一半 (最小为 1)
+                    y: (if mip_height > 1 { mip_height / 2 } else { 1 }) as i32,
+                    z: 1,
+                },
+            ])
+            .dst_subresource(dst_subresource); // 指定目标子资源
+
+        // c. 执行 Blit 命令
+        //    将 `image` 的 `i-1` mip 层 blit 到 `image` 的 `i` mip 层。
+        //    源图像布局必须是 `TRANSFER_SRC_OPTIMAL`。
+        //    目标图像布局必须是 `TRANSFER_DST_OPTIMAL`。
+        //    (注意：目标 mip 层 `i` 此时应该已经处于 `TRANSFER_DST_OPTIMAL` 布局，
+        //     这是在 `create_texture_image` 中，在复制 mip 0 数据之后，对整个图像（所有 mip 层）
+        //     进行初始布局转换时设置的。)
+        unsafe {
+            device.cmd_blit_image(
+                command_buffer,
+                image,                                 // 源图像
+                vk::ImageLayout::TRANSFER_SRC_OPTIMAL, // 源图像布局
+                image,                                 // 目标图像 (是同一个图像)
+                vk::ImageLayout::TRANSFER_DST_OPTIMAL, // 目标图像布局
+                &[blit],                               // Blit 操作描述
+                vk::Filter::LINEAR,                    // 使用线性过滤进行缩放
+            );
+        }
+
+        // d. 转换 Mip 层级 `i-1` (源层) 的布局：从 `TRANSFER_SRC` 到 `SHADER_READ_ONLY`
+        //    因为 `i-1` 层作为源已经被读取完毕，现在可以将其转换为最终的、着色器可读的布局。
+        barrier.old_layout = vk::ImageLayout::TRANSFER_SRC_OPTIMAL; // 它刚被用作传输源
+        barrier.new_layout = vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL; // 转换为着色器只读布局
+        barrier.src_access_mask = vk::AccessFlags::TRANSFER_READ; // 上一个操作是从它读取
+        barrier.dst_access_mask = vk::AccessFlags::SHADER_READ; // 下一个预期的操作是着色器读取
+
+        unsafe {
+            device.cmd_pipeline_barrier(
+                command_buffer,
+                vk::PipelineStageFlags::TRANSFER, // 源阶段：blit 读取完成
+                vk::PipelineStageFlags::FRAGMENT_SHADER, // 目标阶段：准备好被片段着色器采样
+                vk::DependencyFlags::empty(),
+                &[] as &[vk::MemoryBarrier],
+                &[] as &[vk::BufferMemoryBarrier],
+                &[barrier],
+            );
+        }
+
+        // e. 更新 mip 尺寸，为下一轮迭代做准备 (下一轮的源是当前生成的目标)
+        if mip_width > 1 {
+            mip_width /= 2;
+        }
+        if mip_height > 1 {
+            mip_height /= 2;
+        }
+    }
+
+    // 6. 转换最后一个 Mip 层级 (`mip_levels - 1`) 的布局：从 `TRANSFER_DST` 到 `SHADER_READ_ONLY`
+    //    循环结束后，最后一个生成的 mip 层 (即 `mip_levels - 1` 层) 在作为 blit 目标后，
+    //    其布局仍然是 `TRANSFER_DST_OPTIMAL`。现在需要将其转换为 `SHADER_READ_ONLY_OPTIMAL`。
+    barrier.subresource_range.base_mip_level = mip_levels - 1; // 目标是最后一个 mip 层
+    barrier.old_layout = vk::ImageLayout::TRANSFER_DST_OPTIMAL; // 它作为 blit 目标被写入
+    barrier.new_layout = vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL; // 转换为着色器只读
+    barrier.src_access_mask = vk::AccessFlags::TRANSFER_WRITE; // 上一个操作是写入它
+    barrier.dst_access_mask = vk::AccessFlags::SHADER_READ; // 准备被着色器读取
+
+    unsafe {
+        device.cmd_pipeline_barrier(
+            command_buffer,
+            vk::PipelineStageFlags::TRANSFER, // 源阶段：最后一个 blit 写入完成
+            vk::PipelineStageFlags::FRAGMENT_SHADER, // 目标阶段：准备好被片段着色器采样
+            vk::DependencyFlags::empty(),
+            &[] as &[vk::MemoryBarrier],
+            &[] as &[vk::BufferMemoryBarrier],
+            &[barrier],
+        );
+    }
+
+    // 7. 结束并提交一次性命令缓冲区
+    // end_single_time_commands_internal 会结束命令记录，提交命令缓冲区到队列，
+    // 并等待 GPU 执行完毕，然后释放命令缓冲区。
+    end_single_time_commands_internal(device, data, command_buffer)?;
+
     Ok(())
 }
 
@@ -2081,6 +2297,7 @@ fn create_image_internal(
     data: &AppData,
     width: u32,
     height: u32,
+    mip_levels: u32,
     format: vk::Format,
     tiling: vk::ImageTiling,
     usage: vk::ImageUsageFlags,
@@ -2093,7 +2310,7 @@ fn create_image_internal(
             height,
             depth: 1,
         })
-        .mip_levels(1)
+        .mip_levels(mip_levels)
         .array_layers(1)
         .format(format)
         .tiling(tiling)
@@ -2132,11 +2349,12 @@ fn create_image_view_internal(
     image: vk::Image,
     format: vk::Format,
     aspects: vk::ImageAspectFlags,
+    mip_levels: u32,
 ) -> Result<vk::ImageView> {
     let subresource_range = vk::ImageSubresourceRange::default()
         .aspect_mask(aspects)
         .base_mip_level(0)
-        .level_count(1)
+        .level_count(mip_levels)
         .base_array_layer(0)
         .layer_count(1);
 
@@ -2171,6 +2389,7 @@ fn transition_image_layout_internal(
     format: vk::Format,
     old_layout: vk::ImageLayout,
     new_layout: vk::ImageLayout,
+    mip_levels: u32,
 ) -> Result<()> {
     let (src_access_mask, dst_access_mask, src_stage_mask, dst_stage_mask) =
         match (old_layout, new_layout) {
@@ -2218,7 +2437,7 @@ fn transition_image_layout_internal(
     let subresource = vk::ImageSubresourceRange::default()
         .aspect_mask(aspect_mask)
         .base_mip_level(0)
-        .level_count(1)
+        .level_count(mip_levels)
         .base_array_layer(0)
         .layer_count(1);
 
@@ -2385,7 +2604,7 @@ impl ApplicationHandler for AppHandler {
         }
 
         let window_attributes = Window::default_attributes()
-            .with_title("Vulkan Tutorial (Rust) - 28 Model Loading")
+            .with_title("Vulkan Tutorial (Rust) - 29 Mip Mapping")
             .with_inner_size(LogicalSize::new(1024.0, 768.0));
 
         let window = match event_loop.create_window(window_attributes) {

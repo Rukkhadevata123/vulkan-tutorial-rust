@@ -1,9 +1,15 @@
 {
     "cSpell.words": [
+        "DONT",
+        "framebuffers",
         "Libloading",
         "libvulkan",
+        "msaa",
         "nalgebra",
         "repr",
+        "subpass",
+        "subpasses",
+        "Subresource",
         "Swapchain",
         "tobj",
         "walkdir",

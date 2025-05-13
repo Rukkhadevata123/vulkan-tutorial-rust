@@ -47,6 +47,14 @@ name = "28_model_loading"
 path = "src/28_model_loading.rs"
 
 [[bin]]
+name = "29_mipmapping"
+path = "src/29_mipmapping.rs"
+
+[[bin]]
+name = "30_multisampling"
+path = "src/30_multisampling.rs"
+
+[[bin]]
 name = "winit_example"
 path = "src/winit_example.rs"
 
