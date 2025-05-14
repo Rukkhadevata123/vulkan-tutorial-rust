@@ -55,6 +55,18 @@ name = "30_multisampling"
 path = "src/30_multisampling.rs"
 
 [[bin]]
+name = "31_push_constants"
+path = "src/31_push_constants.rs"
+
+[[bin]]
+name = "32_recycling_command_buffers"
+path = "src/32_recycling_command_buffers.rs"
+
+[[bin]]
+name = "33_secondary_command_buffers"
+path = "src/33_secondary_command_buffers.rs"
+
+[[bin]]
 name = "winit_example"
 path = "src/winit_example.rs"
 
