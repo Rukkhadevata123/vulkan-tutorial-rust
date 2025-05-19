@@ -19,6 +19,9 @@ pub fn get_required_instance_extensions(
         #[cfg(target_os = "linux")]
         Ok(RawWindowHandle::Xlib(_)) => &[vk::KHR_SURFACE_NAME, vk::KHR_XLIB_SURFACE_NAME],
 
+        #[cfg(target_os = "windows")]
+        Ok(RawWindowHandle::Win32(_)) => &[vk::KHR_SURFACE_NAME, vk::KHR_WIN32_SURFACE_NAME],
+
         _ => {
             unimplemented!(
                 "Unsupported window handle type for Linux, or error obtaining window handle."
@@ -78,6 +81,20 @@ pub unsafe fn create_surface(
                 .window(window.window); // window.window is u64 (XID)
             let xlib_instance = ash::khr::xlib_surface::Instance::new(entry, instance);
             unsafe { xlib_instance.create_xlib_surface(&info, None) }
+        }
+
+        #[cfg(target_os = "windows")]
+        (Ok(RawDisplayHandle::Windows(display)), Ok(RawWindowHandle::Win32(window))) => {
+            let hinstance = window
+                .hinstance
+                .expect("Failed to get hinstance from window handle")
+                .get();
+            let hwnd = window.hwnd.get();
+            let info = vk::Win32SurfaceCreateInfoKHR::default()
+                .hinstance(hinstance as vk::HINSTANCE)
+                .hwnd(hwnd as vk::HWND);
+            let win32_instance = ash::khr::win32_surface::Instance::new(entry, instance);
+            unsafe { win32_instance.create_win32_surface(&info, None) }
         }
 
         _ => {

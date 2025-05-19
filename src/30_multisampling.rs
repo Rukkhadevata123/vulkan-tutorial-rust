@@ -2722,7 +2722,7 @@ impl ApplicationHandler for AppHandler {
         }
 
         let window_attributes = Window::default_attributes()
-            .with_title("Vulkan Tutorial (Rust) - 29 Mip Mapping")
+            .with_title("Vulkan Tutorial (Rust) - 30 Multi Sampling")
             .with_inner_size(LogicalSize::new(1024.0, 768.0));
 
         let window = match event_loop.create_window(window_attributes) {
