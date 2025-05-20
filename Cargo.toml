@@ -29,6 +29,9 @@ pretty_env_logger = "0.5"  # Environment-based logger with pretty output
 # Dynamic Library Loading
 libloading = "0.8"         # Used by Ash to load the Vulkan loader/runtime
 
+# Random 
+rand = "0.9"
+
 # Build-time Dependencies
 [build-dependencies]
 walkdir = "2"              # To find shader files in the build script
@@ -65,6 +68,10 @@ path = "src/32_recycling_command_buffers.rs"
 [[bin]]
 name = "33_secondary_command_buffers"
 path = "src/33_secondary_command_buffers.rs"
+
+[[bin]]
+name = "34_compute_shaders"
+path = "src/34_compute_shaders.rs"
 
 [[bin]]
 name = "winit_example"

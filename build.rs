@@ -35,7 +35,7 @@ fn main() {
         let source_path = entry.path();
         // Check if the file extension is .vert or .frag
         if let Some(extension_str) = source_path.extension().and_then(|s| s.to_str()) {
-            if extension_str == "vert" || extension_str == "frag" {
+            if extension_str == "vert" || extension_str == "frag" || extension_str == "comp" {
                 // Construct the output SPIR-V filename (e.g., shader.vert.spv)
                 let source_filename = source_path
                     .file_name()
