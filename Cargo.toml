@@ -74,6 +74,10 @@ name = "34_compute_shaders"
 path = "src/34_compute_shaders.rs"
 
 [[bin]]
+name = "35_combined_demo"
+path = "src/35_combined_demo.rs"
+
+[[bin]]
 name = "winit_example"
 path = "src/winit_example.rs"
 

@@ -116,7 +116,10 @@ impl QueueFamilyIndices {
 
         let graphics = properties
             .iter()
-            .position(|p| p.queue_flags.contains(vk::QueueFlags::GRAPHICS))
+            .position(|p| {
+                p.queue_flags
+                    .contains(vk::QueueFlags::GRAPHICS | vk::QueueFlags::COMPUTE)
+            })
             .map(|i| i as u32);
 
         let mut present = None;

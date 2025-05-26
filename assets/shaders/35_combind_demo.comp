@@ -1,0 +1,93 @@
+#version 450
+
+struct Particle {
+    vec2 position;
+    vec2 velocity;
+    vec4 color;
+};
+
+// 场景中的模型边界（可以通过统一缓冲区传递）
+layout (binding = 0) uniform ParameterUBO {
+    float delta_time;
+    vec4 scene_bounds;  // x=min_x, y=min_y, z=max_x, w=max_y
+    vec3 scene_center;  // 场景中心点，粒子系统可环绕该点
+    float attraction_strength; // 粒子向场景中心的吸引力
+    float color_cycle_speed;   // 颜色变化周期速度
+} ubo;
+
+// 粒子输入和输出数据
+layout(std140, binding = 1) readonly buffer ParticleSSBOIn {
+   Particle particlesIn[ ];
+};
+
+layout(std140, binding = 2) buffer ParticleSSBOOut {
+   Particle particlesOut[ ];
+};
+
+// 工作组大小
+layout (local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+// 根据距离生成颜色
+vec4 calculateColor(vec2 position, float time) {
+    // 根据位置和时间计算颜色
+    float dist = length(position);
+    
+    // 使用多个颜色波进行混合
+    float r = 0.5 + 0.5 * sin(dist * 3.0 + time * ubo.color_cycle_speed);
+    float g = 0.5 + 0.5 * sin(dist * 4.0 + time * ubo.color_cycle_speed + 1.0);
+    float b = 0.5 + 0.5 * sin(dist * 5.0 + time * ubo.color_cycle_speed + 2.0);
+    
+    return vec4(r, g, b, 1.0);
+}
+
+void main() 
+{
+    uint index = gl_GlobalInvocationID.x;  
+    if (index >= particlesIn.length()) return;
+
+    Particle particleIn = particlesIn[index];
+    
+    // 保存当前位置和速度
+    vec2 newPos = particleIn.position + particleIn.velocity * ubo.delta_time;
+    vec2 newVel = particleIn.velocity;
+    
+    // 添加环绕中心点的行为
+    vec2 center = ubo.scene_center.xy;
+    vec2 toCenter = center - newPos;
+    float distance = length(toCenter);
+    
+    // 为防止"死亡"，当距离过近时要添加排斥力
+    if (distance < 0.1) {
+        // 添加随机散射
+        float angle = index * 3.14159 * 0.01 + ubo.delta_time;
+        newVel += vec2(cos(angle), sin(angle)) * 0.2;
+    } else {
+        // 当距离较远时添加吸引力
+        newVel += normalize(toCenter) * ubo.attraction_strength * ubo.delta_time;
+    }
+    
+    // 限制速度以防止过快
+    float maxSpeed = 1.5;
+    if (length(newVel) > maxSpeed) {
+        newVel = normalize(newVel) * maxSpeed;
+    }
+    
+    // 使用场景边界或自定义边界反弹
+    if ((newPos.x <= ubo.scene_bounds.x) || (newPos.x >= ubo.scene_bounds.z)) {
+        newVel.x = -newVel.x * 0.9;  // 轻微的能量损失
+    }
+    if ((newPos.y <= ubo.scene_bounds.y) || (newPos.y >= ubo.scene_bounds.w)) {
+        newVel.y = -newVel.y * 0.9;  // 轻微的能量损失
+    }
+    
+    // 静态系统时间
+    float time = ubo.delta_time * index * 0.001;
+    
+    // 为每个粒子计算新的颜色
+    vec4 newColor = calculateColor(newPos, time);
+    
+    // 更新粒子
+    particlesOut[index].position = newPos;
+    particlesOut[index].velocity = newVel;
+    particlesOut[index].color = newColor;
+}
