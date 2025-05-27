@@ -1,3 +1,4 @@
+// filepath: /home/yoimiya/vulkan-tutorial-rust/assets/shaders/35_viking_room.frag
 #version 450
 
 layout(binding = 1) uniform sampler2D texSampler;
@@ -12,5 +13,6 @@ layout(push_constant) uniform PushConstants {
 layout(location = 0) out vec4 outColor;
 
 void main() {
-    outColor = vec4(texture(texSampler, fragTexCoord).rgb, pcs.opacity);
+    vec4 texColor = texture(texSampler, fragTexCoord);
+    outColor = vec4(texColor.rgb * fragColor, texColor.a * pcs.opacity);
 }

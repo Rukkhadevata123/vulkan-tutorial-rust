@@ -84,7 +84,7 @@ pub unsafe fn create_surface(
         }
 
         #[cfg(target_os = "windows")]
-        (Ok(RawDisplayHandle::Windows(display)), Ok(RawWindowHandle::Win32(window))) => {
+        (Ok(RawDisplayHandle::Windows(_display)), Ok(RawWindowHandle::Win32(window))) => {
             let hinstance = window
                 .hinstance
                 .expect("Failed to get hinstance from window handle")

@@ -36,45 +36,6 @@ rand = "0.9"
 [build-dependencies]
 walkdir = "2"              # To find shader files in the build script
 
-# Binary Targets
-[[bin]]
-name = "26_texture_mapping"
-path = "src/26_texture_mapping.rs"
 
-[[bin]]
-name = "27_depth_buffering"
-path = "src/27_depth_buffering.rs"
-
-[[bin]]
-name = "28_model_loading"
-path = "src/28_model_loading.rs"
-
-[[bin]]
-name = "29_mipmapping"
-path = "src/29_mipmapping.rs"
-
-[[bin]]
-name = "30_multisampling"
-path = "src/30_multisampling.rs"
-
-[[bin]]
-name = "31_push_constants"
-path = "src/31_push_constants.rs"
-
-[[bin]]
-name = "32_recycling_command_buffers"
-path = "src/32_recycling_command_buffers.rs"
-
-[[bin]]
-name = "33_secondary_command_buffers"
-path = "src/33_secondary_command_buffers.rs"
-
-[[bin]]
-name = "34_compute_shaders"
-path = "src/34_compute_shaders.rs"
-
-[[bin]]
-name = "winit_example"
-path = "src/winit_example.rs"
 
 
