@@ -43,7 +43,7 @@ pub fn record_particle_compute_commands(
         );
 
         // 分派计算工作组
-        let workgroup_count = (PARTICLE_COUNT as u32 + 255) / 256; // 向上取整到256的倍数
+        let workgroup_count = (PARTICLE_COUNT as u32).div_ceil(256); // 向上取整到256的倍数
         device.cmd_dispatch(command_buffer, workgroup_count, 1, 1);
 
         device.end_command_buffer(command_buffer)?;

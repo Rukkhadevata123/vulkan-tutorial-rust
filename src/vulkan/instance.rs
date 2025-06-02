@@ -37,11 +37,7 @@ pub fn vulkan_create_instance(
         .map(|l| unsafe { CStr::from_ptr(l.layer_name.as_ptr()) })
         .collect::<Vec<_>>();
 
-    if VALIDATION_ENABLED
-        && !available_layers
-            .iter()
-            .any(|&layer| layer == VALIDATION_LAYER_NAME)
-    {
+    if VALIDATION_ENABLED && !available_layers.contains(&VALIDATION_LAYER_NAME) {
         return Err(anyhow!("请求的验证层不受支持"));
     }
 
