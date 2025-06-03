@@ -120,7 +120,7 @@ impl App {
     /// 配置窗口属性并创建窗口实例
     fn create_window(&self, event_loop: &ActiveEventLoop) -> Result<Window> {
         let window_attributes = Window::default_attributes()
-            .with_title("Vulkan Tutorial (Rust) - 多模型 + 粒子系统")
+            .with_title("Vulkan Tutorial (Rust) - Multi-Model + Particle System")
             .with_inner_size(LogicalSize::new(1024, 768))
             .with_resizable(true);
 
