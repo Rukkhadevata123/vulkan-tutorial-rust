@@ -10,6 +10,40 @@ use winit::window::Window;
 use crate::constants::*;
 use crate::types::*;
 
+// 模型模块函数导入
+use crate::model::{
+    ModelConfig, create_model_descriptor_pool, create_model_descriptor_set_layout,
+    create_model_descriptor_sets, create_model_index_buffer, create_model_pipeline,
+    create_model_uniform_buffers, create_model_vertex_buffer, load_model_data, render_all_models,
+    update_model_uniform_buffer,
+};
+
+// 粒子系统模块函数导入
+use crate::particle::{
+    create_particle_compute_pipeline, create_particle_descriptor_pool,
+    create_particle_descriptor_set_layout, create_particle_descriptor_sets,
+    create_particle_pipeline, create_particle_storage_buffers, create_particle_uniform_buffers,
+    record_particle_compute_commands, render_particles, update_particle_uniform_buffer,
+};
+
+// 纹理模块函数导入
+use crate::texture::{
+    SamplerConfig, TextureConfig, create_texture_image_view, create_texture_sampler,
+    generate_texture_mipmaps, load_texture,
+};
+
+// Vulkan核心模块函数导入
+use crate::vulkan::{
+    vulkan_create_color_objects, vulkan_create_command_buffers, vulkan_create_command_pools,
+    vulkan_create_compute_command_buffers, vulkan_create_depth_objects, vulkan_create_framebuffers,
+    vulkan_create_instance, vulkan_create_logical_device, vulkan_create_render_pass,
+    vulkan_create_swapchain, vulkan_create_swapchain_image_views, vulkan_create_sync_objects,
+    vulkan_pick_physical_device,
+};
+
+// 窗口系统函数导入
+use crate::create_surface;
+
 /// Vulkan应用程序主类
 /// 管理整个应用程序的生命周期和渲染流程
 #[derive(Clone)]
@@ -35,38 +69,38 @@ impl VulkanApp {
         let mut data = AppData::default();
 
         // 核心Vulkan初始化
-        let instance = crate::vulkan_create_instance(window, &entry, &mut data)?;
-        data.surface = unsafe { crate::create_surface(&instance, &entry, &window, &window)? };
+        let instance = vulkan_create_instance(window, &entry, &mut data)?;
+        data.surface = unsafe { create_surface(&instance, &entry, &window, &window)? };
 
         // 设备和队列设置
-        crate::vulkan_pick_physical_device(&instance, &entry, &mut data)?;
-        let device = crate::vulkan_create_logical_device(&entry, &instance, &mut data)?;
+        vulkan_pick_physical_device(&instance, &entry, &mut data)?;
+        let device = vulkan_create_logical_device(&entry, &instance, &mut data)?;
 
         // 交换链和渲染资源
-        crate::vulkan_create_swapchain(window, &instance, &device, &entry, &mut data)?;
-        crate::vulkan_create_swapchain_image_views(&device, &mut data)?;
-        crate::vulkan_create_render_pass(&instance, &device, &mut data)?;
+        vulkan_create_swapchain(window, &instance, &device, &entry, &mut data)?;
+        vulkan_create_swapchain_image_views(&device, &mut data)?;
+        vulkan_create_render_pass(&instance, &device, &mut data)?;
 
-        // 描述符布局 - 使用新的模块函数
-        crate::model::create_model_descriptor_set_layout(&device, &mut data)?;
-        crate::particle::create_particle_descriptor_set_layout(&device, &mut data)?;
+        // 描述符布局
+        create_model_descriptor_set_layout(&device, &mut data)?;
+        create_particle_descriptor_set_layout(&device, &mut data)?;
 
-        // 管线创建 - 使用新的模块函数
-        crate::model::create_model_pipeline(&device, &mut data)?;
-        crate::particle::create_particle_pipeline(&device, &mut data)?;
-        crate::particle::create_particle_compute_pipeline(&device, &mut data)?;
+        // 管线创建
+        create_model_pipeline(&device, &mut data)?;
+        create_particle_pipeline(&device, &mut data)?;
+        create_particle_compute_pipeline(&device, &mut data)?;
 
         // 命令和缓冲区
-        crate::vulkan_create_command_pools(&instance, &device, &entry, &mut data)?;
-        crate::vulkan_create_color_objects(&instance, &device, &mut data)?;
-        crate::vulkan_create_depth_objects(&instance, &device, &mut data)?;
-        crate::vulkan_create_framebuffers(&device, &mut data)?;
+        vulkan_create_command_pools(&instance, &device, &entry, &mut data)?;
+        vulkan_create_color_objects(&instance, &device, &mut data)?;
+        vulkan_create_depth_objects(&instance, &device, &mut data)?;
+        vulkan_create_framebuffers(&device, &mut data)?;
 
-        // 纹理资源 - 使用新的模块函数
-        let config = crate::texture::TextureConfig::new("assets/textures/viking_room.png")
-            .with_expected_size(1024, 1024);
-        crate::texture::load_texture(&instance, &device, &mut data, config)?;
-        crate::texture::generate_texture_mipmaps(
+        // 纹理资源
+        let config =
+            TextureConfig::new("assets/textures/viking_room.png").with_expected_size(1024, 1024);
+        load_texture(&instance, &device, &mut data, config)?;
+        generate_texture_mipmaps(
             &instance,
             &device,
             &data,
@@ -74,39 +108,35 @@ impl VulkanApp {
             1024,
             ash::vk::Format::R8G8B8A8_SRGB,
         )?;
-        crate::texture::create_texture_image_view(
-            &device,
-            &mut data,
-            ash::vk::Format::R8G8B8A8_SRGB,
-        )?;
+        create_texture_image_view(&device, &mut data, ash::vk::Format::R8G8B8A8_SRGB)?;
 
-        let sampler_config = crate::texture::SamplerConfig::new()
+        let sampler_config = SamplerConfig::new()
             .with_anisotropy(true, 16.0)
             .with_mip_range(0.0, data.mip_levels as f32);
-        crate::texture::create_texture_sampler(&device, &instance, &mut data, sampler_config)?;
+        create_texture_sampler(&device, &instance, &mut data, sampler_config)?;
 
-        // 模型资源 - 使用新的模块函数
-        let model_config = crate::model::ModelConfig::new("assets/models/viking_room.obj")
+        // 模型资源
+        let model_config = ModelConfig::new("assets/models/viking_room.obj")
             .with_default_color(Vec3::new(1.0, 1.0, 1.0));
-        crate::model::load_model_data(&mut data, model_config)?;
-        crate::model::create_model_vertex_buffer(&instance, &device, &mut data)?;
-        crate::model::create_model_index_buffer(&instance, &device, &mut data)?;
-        crate::model::create_model_uniform_buffers(&instance, &device, &mut data)?;
+        load_model_data(&mut data, model_config)?;
+        create_model_vertex_buffer(&instance, &device, &mut data)?;
+        create_model_index_buffer(&instance, &device, &mut data)?;
+        create_model_uniform_buffers(&instance, &device, &mut data)?;
 
-        // 粒子资源 - 使用新的模块函数
-        crate::particle::create_particle_storage_buffers(&instance, &device, &mut data)?;
-        crate::particle::create_particle_uniform_buffers(&instance, &device, &mut data)?;
+        // 粒子资源
+        create_particle_storage_buffers(&instance, &device, &mut data)?;
+        create_particle_uniform_buffers(&instance, &device, &mut data)?;
 
-        // 描述符资源 - 使用新的模块函数
-        crate::model::create_model_descriptor_pool(&device, &mut data)?;
-        crate::particle::create_particle_descriptor_pool(&device, &mut data)?;
-        crate::model::create_model_descriptor_sets(&device, &mut data)?;
-        crate::particle::create_particle_descriptor_sets(&device, &mut data)?;
+        // 描述符资源
+        create_model_descriptor_pool(&device, &mut data)?;
+        create_particle_descriptor_pool(&device, &mut data)?;
+        create_model_descriptor_sets(&device, &mut data)?;
+        create_particle_descriptor_sets(&device, &mut data)?;
 
         // 命令缓冲区和同步
-        crate::vulkan_create_command_buffers(&device, &mut data)?;
-        crate::vulkan_create_compute_command_buffers(&device, &mut data)?;
-        crate::vulkan_create_sync_objects(&device, &mut data)?;
+        vulkan_create_command_buffers(&device, &mut data)?;
+        vulkan_create_compute_command_buffers(&device, &mut data)?;
+        vulkan_create_sync_objects(&device, &mut data)?;
 
         Ok(Self {
             entry,
@@ -169,34 +199,30 @@ impl VulkanApp {
 
         self.cleanup_swapchain_resources();
 
-        // 重新创建交换链及其依赖资源 - 使用新的模块函数
-        crate::vulkan_create_swapchain(
+        // 重新创建交换链及其依赖资源
+        vulkan_create_swapchain(
             window,
             &self.instance,
             &self.device,
             &self.entry,
             &mut self.data,
         )?;
-        crate::vulkan_create_swapchain_image_views(&self.device, &mut self.data)?;
-        crate::vulkan_create_render_pass(&self.instance, &self.device, &mut self.data)?;
-        crate::model::create_model_pipeline(&self.device, &mut self.data)?;
-        crate::particle::create_particle_pipeline(&self.device, &mut self.data)?;
-        crate::particle::create_particle_compute_pipeline(&self.device, &mut self.data)?;
-        crate::vulkan_create_color_objects(&self.instance, &self.device, &mut self.data)?;
-        crate::vulkan_create_depth_objects(&self.instance, &self.device, &mut self.data)?;
-        crate::vulkan_create_framebuffers(&self.device, &mut self.data)?;
-        crate::model::create_model_uniform_buffers(&self.instance, &self.device, &mut self.data)?;
-        crate::particle::create_particle_uniform_buffers(
-            &self.instance,
-            &self.device,
-            &mut self.data,
-        )?;
-        crate::model::create_model_descriptor_pool(&self.device, &mut self.data)?;
-        crate::particle::create_particle_descriptor_pool(&self.device, &mut self.data)?;
-        crate::model::create_model_descriptor_sets(&self.device, &mut self.data)?;
-        crate::particle::create_particle_descriptor_sets(&self.device, &mut self.data)?;
-        crate::vulkan_create_command_buffers(&self.device, &mut self.data)?;
-        crate::vulkan_create_compute_command_buffers(&self.device, &mut self.data)?;
+        vulkan_create_swapchain_image_views(&self.device, &mut self.data)?;
+        vulkan_create_render_pass(&self.instance, &self.device, &mut self.data)?;
+        create_model_pipeline(&self.device, &mut self.data)?;
+        create_particle_pipeline(&self.device, &mut self.data)?;
+        create_particle_compute_pipeline(&self.device, &mut self.data)?;
+        vulkan_create_color_objects(&self.instance, &self.device, &mut self.data)?;
+        vulkan_create_depth_objects(&self.instance, &self.device, &mut self.data)?;
+        vulkan_create_framebuffers(&self.device, &mut self.data)?;
+        create_model_uniform_buffers(&self.instance, &self.device, &mut self.data)?;
+        create_particle_uniform_buffers(&self.instance, &self.device, &mut self.data)?;
+        create_model_descriptor_pool(&self.device, &mut self.data)?;
+        create_particle_descriptor_pool(&self.device, &mut self.data)?;
+        create_model_descriptor_sets(&self.device, &mut self.data)?;
+        create_particle_descriptor_sets(&self.device, &mut self.data)?;
+        vulkan_create_command_buffers(&self.device, &mut self.data)?;
+        vulkan_create_compute_command_buffers(&self.device, &mut self.data)?;
 
         self.data
             .images_in_flight
@@ -641,11 +667,11 @@ impl VulkanApp {
         // 更新命令缓冲区
         self.update_command_buffer(image_index)?;
 
-        // 更新模型统一缓冲区 - 使用新的模块函数
-        crate::model::update_model_uniform_buffer(self, image_index)?;
+        // 更新模型统一缓冲区
+        update_model_uniform_buffer(self, image_index)?;
 
-        // 更新粒子统一缓冲区 - 使用新的模块函数
-        crate::particle::update_particle_uniform_buffer(self)?;
+        // 更新粒子统一缓冲区
+        update_particle_uniform_buffer(self)?;
 
         Ok(())
     }
@@ -702,11 +728,11 @@ impl VulkanApp {
                 ash::vk::SubpassContents::INLINE,
             );
 
-            // 1. 首先渲染粒子系统 - 使用新的模块函数
-            crate::particle::render_particles(self, command_buffer)?;
+            // 1. 首先渲染粒子系统
+            render_particles(self, command_buffer)?;
 
-            // 2. 然后渲染模型（使用二级命令缓冲区） - 使用新的模块函数
-            crate::model::render_all_models(self, command_buffer, image_index)?;
+            // 2. 然后渲染模型（使用二级命令缓冲区）
+            render_all_models(self, command_buffer, image_index)?;
 
             self.device.cmd_end_render_pass(command_buffer);
             self.device.end_command_buffer(command_buffer)?;
@@ -720,8 +746,8 @@ impl VulkanApp {
     fn submit_render_commands(&mut self, image_index: usize) -> Result<()> {
         let in_flight_fence = self.data.in_flight_fences[self.frame];
 
-        // 录制并提交计算命令 - 使用新的模块函数
-        crate::particle::record_particle_compute_commands(
+        // 录制并提交计算命令
+        record_particle_compute_commands(
             &self.device,
             &self.data,
             self.data.compute_command_buffers[self.frame],

@@ -5,7 +5,7 @@ use anyhow::{Result, anyhow};
 use ash::{Device, Instance};
 
 use crate::resources::{copy_buffer_to_image, create_buffer, write_buffer_data};
-use crate::texture::texture_images::create_texture_image;
+use crate::texture::create_texture_image;
 use crate::types::AppData;
 
 /// 纹理加载器配置

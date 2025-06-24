@@ -6,7 +6,9 @@ use ash::vk;
 use ash::{Device, Instance};
 use log::*;
 
-use crate::resources::resources_images::{create_image, create_image_view};
+use crate::resources::resources_images::{
+    create_image, create_image_view, transition_image_layout,
+};
 use crate::types::AppData;
 
 /// 创建渲染通道
@@ -163,7 +165,7 @@ pub fn vulkan_create_depth_objects(
     data.depth_image_view =
         create_image_view(device, depth_image, format, vk::ImageAspectFlags::DEPTH, 1)?;
 
-    crate::resources::resources_images::transition_image_layout(
+    transition_image_layout(
         device,
         data,
         depth_image,
