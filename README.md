@@ -6,6 +6,14 @@
 
 A modular Rust implementation of the [Vulkan Tutorial](https://vulkan-tutorial.com/), refactored from a monolithic single-file design into a production-ready modular architecture.
 
+## Demos
+
+![](/assets/demos/1.png)
+
+![](/assets/demos/2.png)
+
+![](/assets/demos/3.png)
+
 ## Features
 
 ### Core Capabilities
