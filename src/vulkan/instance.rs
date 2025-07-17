@@ -117,13 +117,13 @@ extern "system" fn vulkan_debug_callback(
     let message = unsafe { CStr::from_ptr(callback_data.p_message).to_string_lossy() };
 
     if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::ERROR {
-        error!("({:?}) 验证层: {}", type_, message);
+        error!("({type_:?}) 验证层: {message}");
     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::WARNING {
-        warn!("({:?}) 验证层: {}", type_, message);
+        warn!("({type_:?}) 验证层: {message}");
     } else if severity >= vk::DebugUtilsMessageSeverityFlagsEXT::INFO {
-        debug!("({:?}) 验证层: {}", type_, message);
+        debug!("({type_:?}) 验证层: {message}");
     } else {
-        trace!("({:?}) 验证层: {}", type_, message);
+        trace!("({type_:?}) 验证层: {message}");
     }
     vk::FALSE
 }

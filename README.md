@@ -14,6 +14,8 @@ A modular Rust implementation of the [Vulkan Tutorial](https://vulkan-tutorial.c
 
 ![](/assets/demos/3.png)
 
+https://github.com/user-attachments/assets/6f295580-c398-4015-a811-1fc3e0df9116
+
 ## Features
 
 ### Core Capabilities
@@ -154,6 +156,10 @@ for model_idx in 0..self.models {
 ```
 
 ## Vulkan Architecture
+
+### Understanding Vulkan by Gemini2.5 Pro
+
+[Understanding Vulkan](./Understanding_Vulkan.md)
 
 ### Resource Relationships
 

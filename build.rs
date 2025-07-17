@@ -43,12 +43,11 @@ fn main() {
                     .to_str()
                     .expect("Shader source filename is not valid UTF-8");
 
-                let output_filename = format!("{}.spv", source_filename);
+                let output_filename = format!("{source_filename}.spv");
                 let output_path = shader_dir.join(&output_filename);
 
                 println!(
-                    "cargo:warning=Compiling shader: {:?} -> {:?}",
-                    source_path, output_path
+                    "cargo:warning=Compiling shader: {source_path:?} -> {output_path:?}"
                 );
 
                 // Execute glslc to compile the shader
@@ -69,15 +68,13 @@ fn main() {
                             );
                         }
                         println!(
-                            "cargo:warning=Successfully compiled shader: {:?} to {:?}",
-                            source_path, output_path
+                            "cargo:warning=Successfully compiled shader: {source_path:?} to {output_path:?}"
                         );
                     }
                     Err(e) => {
                         // If glslc command itself fails to run (e.g., not found)
                         panic!(
-                            "Failed to execute glslc for shader {:?}. Error: {}. Ensure glslc is in your PATH.",
-                            source_path, e
+                            "Failed to execute glslc for shader {source_path:?}. Error: {e}. Ensure glslc is in your PATH."
                         );
                     }
                 }

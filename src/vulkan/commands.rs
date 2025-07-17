@@ -27,7 +27,7 @@ pub fn vulkan_create_command_pools(
         data.command_pools.push(command_pool);
     }
 
-    info!("命令池创建完成: 1 个全局池 + {} 个图像池", num_images);
+    info!("命令池创建完成: 1 个全局池 + {num_images} 个图像池");
     Ok(())
 }
 
@@ -73,7 +73,7 @@ pub fn vulkan_create_command_buffers(device: &Device, data: &mut AppData) -> Res
 
     data.secondary_command_buffers = vec![vec![]; data.swapchain_images.len()];
 
-    info!("命令缓冲区创建完成: {} 个主缓冲区", num_images);
+    info!("命令缓冲区创建完成: {num_images} 个主缓冲区");
     Ok(())
 }
 
@@ -110,7 +110,7 @@ pub fn vulkan_create_compute_command_buffers(device: &Device, data: &mut AppData
         data.compute_command_buffers.push(command_buffer);
     }
 
-    info!("计算命令缓冲区创建完成: {} 个", MAX_FRAMES_IN_FLIGHT);
+    info!("计算命令缓冲区创建完成: {MAX_FRAMES_IN_FLIGHT} 个");
     Ok(())
 }
 

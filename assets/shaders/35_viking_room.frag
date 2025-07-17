@@ -1,4 +1,3 @@
-// filepath: /home/yoimiya/vulkan-tutorial-rust/assets/shaders/35_viking_room.frag
 #version 450
 
 layout(binding = 1) uniform sampler2D texSampler;

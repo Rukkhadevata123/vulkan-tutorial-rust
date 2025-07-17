@@ -157,7 +157,7 @@ pub fn create_model_uniform_buffers(
             .push(uniform_buffer_memory);
     }
 
-    log::info!("模型统一缓冲区创建完成: {} 个", image_count);
+    log::info!("模型统一缓冲区创建完成: {image_count} 个");
     Ok(())
 }
 

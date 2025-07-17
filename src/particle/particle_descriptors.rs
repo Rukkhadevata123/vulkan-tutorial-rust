@@ -72,7 +72,7 @@ pub fn create_particle_descriptor_pool(device: &Device, data: &mut AppData) -> R
 
     data.particle_descriptor_pool = create_descriptor_pool(device, config)?;
 
-    log::info!("粒子描述符池创建完成: 最大集合数 {}", MAX_FRAMES_IN_FLIGHT);
+    log::info!("粒子描述符池创建完成: 最大集合数 {MAX_FRAMES_IN_FLIGHT}");
     Ok(())
 }
 
@@ -104,7 +104,7 @@ pub fn create_particle_descriptor_sets(device: &Device, data: &mut AppData) -> R
         update_particle_descriptor_set(device, data, i)?;
     }
 
-    log::info!("粒子描述符集创建完成: {} 个", MAX_FRAMES_IN_FLIGHT);
+    log::info!("粒子描述符集创建完成: {MAX_FRAMES_IN_FLIGHT} 个");
     Ok(())
 }
 

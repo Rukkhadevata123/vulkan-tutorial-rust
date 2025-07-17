@@ -43,13 +43,13 @@ impl ApplicationHandler for App {
                             self.window = Some(window);
                         }
                         Err(e) => {
-                            error!("Vulkan应用程序初始化失败: {}", e);
+                            error!("Vulkan应用程序初始化失败: {e}");
                             self.exit_with_error(event_loop, &e);
                         }
                     }
                 }
                 Err(e) => {
-                    error!("窗口创建失败: {}", e);
+                    error!("窗口创建失败: {e}");
                     self.exit_with_error(event_loop, &e);
                 }
             }
@@ -150,7 +150,7 @@ impl App {
             (Some(vulkan_app), Some(window)) => {
                 // 执行渲染
                 if let Err(e) = vulkan_app.render(window) {
-                    error!("渲染失败: {}", e);
+                    error!("渲染失败: {e}");
                     self.exit_with_error(event_loop, &e);
                     return;
                 }
@@ -292,13 +292,13 @@ impl App {
     /// 错误退出
     /// 发生不可恢复错误时的退出流程
     fn exit_with_error(&mut self, event_loop: &ActiveEventLoop, error: &anyhow::Error) {
-        error!("应用程序遇到严重错误: {}", error);
+        error!("应用程序遇到严重错误: {error}");
 
         // 输出详细错误信息
         let mut source = error.source();
         let mut level = 1;
         while let Some(err) = source {
-            error!("  原因 {}: {}", level, err);
+            error!("  原因 {level}: {err}");
             source = err.source();
             level += 1;
         }

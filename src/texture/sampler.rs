@@ -141,6 +141,6 @@ pub fn create_texture_sampler(
             .map_err(|e| anyhow!("创建纹理采样器失败: {}", e))?
     };
 
-    log::info!("纹理采样器创建完成 (各向异性: {:.1}x)", max_anisotropy);
+    log::info!("纹理采样器创建完成 (各向异性: {max_anisotropy:.1}x)");
     Ok(())
 }

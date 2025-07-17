@@ -91,9 +91,7 @@ pub fn create_particle_storage_buffers(
     }
 
     log::info!(
-        "粒子存储缓冲区创建完成: {} 个缓冲区，每个包含 {} 粒子",
-        MAX_FRAMES_IN_FLIGHT,
-        PARTICLE_COUNT
+        "粒子存储缓冲区创建完成: {MAX_FRAMES_IN_FLIGHT} 个缓冲区，每个包含 {PARTICLE_COUNT} 粒子"
     );
     Ok(())
 }
@@ -125,7 +123,7 @@ pub fn create_particle_uniform_buffers(
         data.particle_uniform_buffers_memory.push(buffer_memory);
     }
 
-    log::info!("粒子统一缓冲区创建完成: {} 个", MAX_FRAMES_IN_FLIGHT);
+    log::info!("粒子统一缓冲区创建完成: {MAX_FRAMES_IN_FLIGHT} 个");
     Ok(())
 }
 

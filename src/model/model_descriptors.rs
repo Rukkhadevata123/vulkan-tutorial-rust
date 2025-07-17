@@ -64,7 +64,7 @@ pub fn create_model_descriptor_pool(device: &Device, data: &mut AppData) -> Resu
 
     data.model_descriptor_pool = create_descriptor_pool(device, config)?;
 
-    log::info!("模型描述符池创建完成: 最大集合数 {}", image_count);
+    log::info!("模型描述符池创建完成: 最大集合数 {image_count}");
     Ok(())
 }
 
@@ -98,7 +98,7 @@ pub fn create_model_descriptor_sets(device: &Device, data: &mut AppData) -> Resu
         update_model_descriptor_set(device, data, i)?;
     }
 
-    log::info!("模型描述符集创建完成: {} 个", image_count);
+    log::info!("模型描述符集创建完成: {image_count} 个");
     Ok(())
 }
 

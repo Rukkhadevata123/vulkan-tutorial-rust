@@ -120,9 +120,9 @@ pub fn vulkan_pick_physical_device(
             unsafe { CStr::from_ptr(properties.device_name.as_ptr()).to_string_lossy() };
 
         if let Err(error) = check_device_suitability(instance, entry, data, physical_device) {
-            warn!("跳过物理设备 ({}): {}", device_name, error);
+            warn!("跳过物理设备 ({device_name}): {error}");
         } else {
-            info!("选择的物理设备: {}", device_name);
+            info!("选择的物理设备: {device_name}");
             data.physical_device = physical_device;
             data.msaa_samples = get_max_msaa_samples(instance, data);
             info!("最大MSAA采样数: {:?}", data.msaa_samples);

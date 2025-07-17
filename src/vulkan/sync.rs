@@ -47,7 +47,7 @@ pub fn vulkan_create_sync_objects(device: &Device, data: &mut AppData) -> Result
     // 初始化交换链图像的围栏跟踪
     data.images_in_flight = vec![vk::Fence::null(); data.swapchain_images.len()];
 
-    info!("同步对象创建完成: {} 个飞行帧", MAX_FRAMES_IN_FLIGHT);
+    info!("同步对象创建完成: {MAX_FRAMES_IN_FLIGHT} 个飞行帧");
     Ok(())
 }
 
