@@ -2010,7 +2010,6 @@ dependencies = [
  "anyhow",
  "ash",
  "image",
- "libloading",
  "log",
  "nalgebra",
  "pretty_env_logger",

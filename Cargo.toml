@@ -26,9 +26,6 @@ thiserror = "2"            # For creating custom error types
 log = "0.4"                # Logging facade
 pretty_env_logger = "0.5"  # Environment-based logger with pretty output
 
-# Dynamic Library Loading
-libloading = "0.8"         # Used by Ash to load the Vulkan loader/runtime
-
 # Random 
 rand = "0.9"
 
