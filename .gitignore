@@ -3,3 +3,11 @@ tmp.rs
 tmp.cpp
 tmpp.cpp
 assets/shaders/*.spv
+legacy
+
+
+# Added by cargo
+#
+# already existing elements were commented out
+
+#/target

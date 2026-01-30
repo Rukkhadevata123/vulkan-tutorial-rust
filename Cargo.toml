@@ -2,37 +2,5 @@
 name = "vulkan-tutorial-rust"
 version = "0.1.0"
 edition = "2024"
-build = "build.rs"
 
-# Core Dependencies
 [dependencies]
-# Windowing and Input System
-winit = "0.30"
-raw-window-handle = "0.6" # Required by winit for platform-specific window handles
-
-# Vulkan API Bindings
-ash = "0.38" # Low-level Vulkan bindings
-
-# Utility Crates
-image = "0.25"             # For loading texture images
-nalgebra = "0.33"          # For linear algebra (vectors, matrices)
-tobj = "4"                 # For loading .obj 3D models (if used in examples)
-
-# Error Handling
-anyhow = "1"               # Flexible error handling
-thiserror = "2"            # For creating custom error types
-
-# Logging
-log = "0.4"                # Logging facade
-pretty_env_logger = "0.5"  # Environment-based logger with pretty output
-
-# Random 
-rand = "0.9"
-
-# Build-time Dependencies
-[build-dependencies]
-walkdir = "2"              # To find shader files in the build script
-
-
-
-
