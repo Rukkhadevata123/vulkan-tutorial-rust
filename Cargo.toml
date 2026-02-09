@@ -4,3 +4,21 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+vulkano = "0.35"
+winit = "0.30"
+gltf = "1.4"
+image = "0.25"
+nalgebra = "0.34"
+rand = "0.10"
+
+[[bin]]
+name = "example1"
+path = "src/example1.rs"
+
+[[bin]]
+name = "viking_room"
+path = "src/viking_room.rs"
+
+[[bin]]
+name = "compute_shader"
+path = "src/compute_shader.rs"
