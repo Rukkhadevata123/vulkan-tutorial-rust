@@ -37,8 +37,20 @@ This example focuses on General-Purpose GPU (GPGPU) programming. It simulates a 
 ![Compute Shader 2](assets/outputs/compute_shader2.png)
 ![Compute Shader 3](assets/outputs/compute_shader3.png)
 
-# Vulkan Concepts Summary
+## 3. Multithreaded Particle System (`multithreading`)
 
+This example demonstrates how to leverage multi-threading in Vulkan to maximize CPU core utilization during command buffer recording.
+
+**Key Features:**
+
+- **Parallel Command Recording**: Divides the particle simulation workload across multiple worker threads. Each thread records its own Compute Command Buffer in parallel.
+- **Thread-Local Allocators**: Uses separate `StandardCommandBufferAllocator` instances for each thread to avoid lock contention.
+- **Push Constants for Partitioning**: Uses Push Constants to assign specific particle ranges (`start_index` and `count`) to each thread's dispatch call.
+- **Synchronized Submission**: The main thread collects all recorded command buffers and submits them to the GPU in a single batch chain.
+
+![Multithreading](assets/outputs/multithreading.png)
+
+# Vulkan Concepts Summary
 Understanding Vulkan requires grasping its explicit nature. Below is a summary of the core concepts utilized in this codebase.
 
 ### Initialization

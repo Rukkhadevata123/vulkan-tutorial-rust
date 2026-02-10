@@ -22,3 +22,7 @@ path = "src/viking_room.rs"
 [[bin]]
 name = "compute_shader"
 path = "src/compute_shader.rs"
+
+[[bin]]
+name = "multithreading"
+path = "src/multithreading.rs"
