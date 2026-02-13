@@ -50,7 +50,23 @@ This example demonstrates how to leverage multi-threading in Vulkan to maximize 
 
 ![Multithreading](assets/outputs/multithreading.png)
 
+## 4. Hardware Ray Tracing (`ray_tracing`)
+
+This example implements Hybrid Rendering using Vulkan's **Ray Query** (KHR_ray_query) extension. It combines traditional rasterization for primary visibility with ray tracing for effects like shadows and reflections.
+
+**Key Features:**
+
+- **Acceleration Structures**: Builds Bottom-Level (BLAS) and Top-Level (TLAS) acceleration structures to represent the scene geometry for the ray tracer.
+- **Ray Queries**: Uses `RayQuery` in the fragment shader to traverse the acceleration structures.
+  - **Hard Shadows**: Traces rays towards the light source to determine visibility.
+  - **Reflections**: Traces rays based on surface normals to sample reflected colors from other objects.
+- **TLAS Animation**: Updates the Top-Level Acceleration Structure every frame to reflect the rotating model transformation, handling synchronization and double-buffering of AS resources.
+- **Bindless Textures**: Maps material IDs to a texture array accessible in the shader.
+
+![Ray Tracing](assets/outputs/ray_tracing.png)
+
 # Vulkan Concepts Summary
+
 Understanding Vulkan requires grasping its explicit nature. Below is a summary of the core concepts utilized in this codebase.
 
 ### Initialization
@@ -64,23 +80,27 @@ Understanding Vulkan requires grasping its explicit nature. Below is a summary o
 - **Buffers**: Linear blocks of memory used for vertex data, indices, or uniform variables.
 - **Images**: Multidimensional arrays of data, used for textures, depth attachments, and swapchain targets.
 - **Descriptors**: Opaque objects that describe how shaders access resources. Sets of descriptors are bound to the pipeline to provide textures or buffer data during execution.
+  - *Dynamic Rendering Note*: Unlike legacy OpenGL, Vulkan requires explicit description of resource bindings via **Descriptor Set Layouts**.
 
 ### Pipelines
 
 - **Graphics Pipeline**: A state machine that defines how vertices are processed and rasterized into pixels. It includes fixed-function states (input assembly, rasterizer, depth stencil) and programmable stages (vertex and fragment shaders).
 - **Compute Pipeline**: A simpler pipeline dedicated to computational tasks. It does not use the rasterization engine and operates on arbitrary data structures via dispatch commands.
+- **Ray Tracing Pipeline**: (Used in hybrid rendering) Utilizing `Ray Query`, we can access acceleration structures directly from standard shader stages (like Fragment Shaders) to perform ray intersections without a full context switch to a dedicated Ray Tracing Pipeline.
+
+### Synchronization & Frame Buffering
+
+- **Fences & Semaphores**:
+  - **Fences**: Used to synchronize the CPU with the GPU (e.g., waiting for a frame to finish rendering before recording the next one).
+  - **Semaphores**: Used to synchronize operations within the GPU (e.g., ensuring the compute shader finishes writing to the buffer before the vertex shader reads from it).
+- **Double Buffering (Frames in Flight)**:
+  - To maximize performance, we process multiple frames simultaneously. While the GPU renders Frame 0, the CPU records commands for Frame 1.
+  - This requires duplicating CPU-writable resources (Uniform Buffers, Acceleration Structure Scratch Buffers) to prevent **Race Conditions** where the CPU overwrites data the GPU is currently reading.
 
 ### Presentation
 
 - **Surface**: An abstraction of the OS-native window where images can be rendered.
 - **Swapchain**: A queue of images waiting to be presented to the screen. It manages the synchronization between the GPU rendering rate and the display refresh rate (VSync).
-
-### Command Execution
-
-- **Command Buffers**: Vulkan is asynchronous. Commands (draw, dispatch, copy) are recorded into command buffers and then submitted to a queue for execution.
-- **Synchronization**:
-  - **Fences**: Used to synchronize the CPU with the GPU (e.g., waiting for a frame to finish rendering before recording the next one).
-  - **Semaphores**: Used to synchronize operations within the GPU (e.g., ensuring the compute shader finishes writing to the buffer before the vertex shader reads from it).
 
 # Quick Start
 
@@ -120,6 +140,18 @@ cargo run --release --bin compute_shader
 
 ```bash
 cargo run --release --bin viking_room
+```
+
+**Run the Multithreaded Particle System:**
+
+```bash
+cargo run --release --bin multithreading
+```
+
+**Run the Ray Tracing Demo:**
+
+```bash
+cargo run --release --bin ray_tracing
 ```
 
 # Acknowledgments

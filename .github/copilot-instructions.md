@@ -1,1 +1,0 @@
-## All comments should be in English.

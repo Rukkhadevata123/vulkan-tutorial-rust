@@ -17,7 +17,8 @@ use vulkano::{
     },
     device::{
         Device, DeviceCreateInfo, DeviceExtensions, DeviceFeatures, Queue, QueueCreateInfo,
-        QueueFlags, physical::PhysicalDevice,
+        QueueFlags,
+        physical::{PhysicalDevice, PhysicalDeviceType},
     },
     format::{ClearValue, Format},
     image::{
@@ -63,7 +64,7 @@ const MAX_FRAMES_IN_FLIGHT: usize = 2;
 
 #[repr(C)]
 // Add VertexTrait derive to automatically generate input state definition
-#[derive(Debug, Clone, Copy, BufferContents, vulkano::pipeline::graphics::vertex_input::Vertex)]
+#[derive(Debug, Clone, Copy, BufferContents, VertexTrait)]
 struct Vertex {
     #[format(R32G32B32_SFLOAT)]
     #[name("input.inPosition")]
@@ -325,9 +326,9 @@ impl App {
                     .map(|i| (p, i as u32))
             })
             .min_by_key(|(p, _)| match p.properties().device_type {
-                vulkano::device::physical::PhysicalDeviceType::DiscreteGpu => 0,
-                vulkano::device::physical::PhysicalDeviceType::IntegratedGpu => 1,
-                vulkano::device::physical::PhysicalDeviceType::VirtualGpu => 2,
+                PhysicalDeviceType::DiscreteGpu => 0,
+                PhysicalDeviceType::IntegratedGpu => 1,
+                PhysicalDeviceType::VirtualGpu => 2,
                 _ => 3,
             })
             .expect("no suitable physical device found");

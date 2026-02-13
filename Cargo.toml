@@ -10,6 +10,7 @@ gltf = "1.4"
 image = "0.25"
 nalgebra = "0.34"
 rand = "0.10"
+tobj = "4.0"
 
 [[bin]]
 name = "example1"
@@ -26,3 +27,7 @@ path = "src/compute_shader.rs"
 [[bin]]
 name = "multithreading"
 path = "src/multithreading.rs"
+
+[[bin]]
+name = "ray_tracing"
+path = "src/ray_tracing.rs"
