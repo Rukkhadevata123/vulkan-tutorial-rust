@@ -559,7 +559,7 @@ impl App {
         }
 
         let format = self.swapchain.as_ref().unwrap().image_format();
-        let image_count = self.swapchain_images.len();
+        let image_count = MAX_FRAMES_IN_FLIGHT;
 
         for _ in 0..image_count {
             let image = Image::new(
@@ -605,7 +605,7 @@ impl App {
         self.depth_images.clear();
         self.depth_image_views.clear();
 
-        let image_count = self.swapchain_images.len();
+        let image_count = MAX_FRAMES_IN_FLIGHT;
 
         for _ in 0..image_count {
             let image = Image::new(
@@ -1020,7 +1020,7 @@ impl App {
 
         let color_attachment = if self.msaa_samples != vulkano::image::SampleCount::Sample1 {
             let mut info = RenderingAttachmentInfo::image_view(
-                self.color_image_views[image_index as usize].clone(),
+                self.color_image_views[self.frame_index].clone(),
             );
             info.image_layout = ImageLayout::ColorAttachmentOptimal;
             info.load_op = AttachmentLoadOp::Clear;
@@ -1042,7 +1042,7 @@ impl App {
         };
 
         let mut depth_attachment = RenderingAttachmentInfo::image_view(
-            self.depth_image_views[image_index as usize].clone(),
+            self.depth_image_views[self.frame_index].clone(),
         );
         depth_attachment.image_layout = ImageLayout::DepthStencilAttachmentOptimal;
         depth_attachment.load_op = AttachmentLoadOp::Clear;
@@ -1141,7 +1141,7 @@ impl App {
         self.frame_index = (self.frame_index + 1) % MAX_FRAMES_IN_FLIGHT;
     }
 
-    fn update_uniform_buffer(&self, image_index: usize) {
+    fn update_uniform_buffer(&self, frame_index: usize) {
         let aspect_ratio = self.width as f32 / self.height as f32;
 
         let duration = std::time::SystemTime::now()
@@ -1174,7 +1174,7 @@ impl App {
             proj: proj.into(),
         };
 
-        *self.uniform_buffers[image_index].write().unwrap() = ubo;
+        *self.uniform_buffers[frame_index].write().unwrap() = ubo;
     }
 
     fn recreate_swapchain_impl(&mut self) {
