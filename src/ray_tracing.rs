@@ -1639,9 +1639,8 @@ impl App {
             info
         };
 
-        let mut depth_attachment = RenderingAttachmentInfo::image_view(
-            self.depth_image_views[self.frame_index].clone(),
-        );
+        let mut depth_attachment =
+            RenderingAttachmentInfo::image_view(self.depth_image_views[self.frame_index].clone());
         depth_attachment.image_layout = ImageLayout::DepthStencilAttachmentOptimal;
         depth_attachment.load_op = AttachmentLoadOp::Clear;
         depth_attachment.store_op = AttachmentStoreOp::DontCare;

@@ -785,7 +785,8 @@ impl App {
                     }
                     Err(e) => {
                         println!("Failed to signal fence and flush: {:?}", e);
-                        self.fences[self.frame_index] = None;
+                        self.fences[self.frame_index] =
+                            Some(vulkano::sync::now(self.device.as_ref().unwrap().clone()).boxed());
                         return;
                     }
                 }
@@ -944,11 +945,13 @@ impl App {
             }
             Err(Validated::Error(VulkanError::OutOfDate)) => {
                 self.recreate_swapchain = true;
-                self.fences[self.frame_index] = None;
+                self.fences[self.frame_index] =
+                    Some(vulkano::sync::now(self.device.as_ref().unwrap().clone()).boxed());
             }
             Err(e) => {
                 println!("Failed to flush future: {:?}", e);
-                self.fences[self.frame_index] = None;
+                self.fences[self.frame_index] =
+                    Some(vulkano::sync::now(self.device.as_ref().unwrap().clone()).boxed());
             }
         }
 
